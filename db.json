@@ -1,112 +1,158 @@
 {
-    "seller": [
+  "seller": [
+    {
+      "id": 1,
+      "firstName": "Ouma",
+      "lastName": "Arera",
+      "username": "oumaarera@sanaayetu.com",
+      "type": "seller",
+      "status": "active",
+      "shopName": "Rambungfee Juakali",
+      "location": "Juja",
+      "class": "Juakali",
+      "sales": [
         {
-            "id": 1,
-            "firstName": "Ouma",
-            "lastName": "Arera",
-            "username": "oumaarera@sanaayetu.com",
-            "type": "seller",
-            "status": "active",
-            "shopName": "Rambungfee Juakali",
-            "location": "Juja",
-            "class": "Juakali",
-            "sales": [
-                {
-                    "id": 1,
-                    "buyer": "monicamwangi@gmail.com",
-                    "item": "chair",
-                    "date": "2024-02-19 0000",
-                    "amount": 30000,
-                    "orderNo": "XW45SWR"
-                }
-            ],
-            
-            "merchandise": [
-                {
-                    "id": 1,
-                    "name": "Chair",
-                    "quantity": 10,
-                    "color": "black",
-                    "size": "one seater",
-                    "weight": "3kg",
-                    "price": 1500,
-                    "transport": 200,
-                    "deliverytime": 3,
-                    "category": "furniture",
-                    "shopName": "Rambungfee Juakali",
-                    "location": "Juja",
-                    "reviews": [
-                        {
-                            "id": 1,
-                            "sender": "monicamwangi@gmail.com",
-                            "date":"2024-02-19 0000",
-                            "status": "read",
-                            "review": ["dfghjsdffghjsdghjksdghjd", "dfgshjdfghsjdfghjskdfghjksdg"],
-                            "reply": ["sdfghjdffghsjkdfghjkdf", "xfghdvcvbnxc werrtyuiweghj"]
-                        }
-                    ],
-                    "messages": [
-                        {
-                            "id": 1,
-                            "sender": "monicamwangi@gmail.com",
-                            "date":"2024-02-19 0000",
-                            "status": "read",
-                            "review": ["dfghjsdffghjsdghjksdghjd", "dfgshjdfghsjdfghjskdfghjksdg"],
-                            "reply": ["sdfghjdffghsjkdfghjkdf", "xfghdvcvbnxc werrtyuiweghj"]
-                        }
-                    ],
-                    "images": []
-
-                }
-            ]
+          "id": 1,
+          "buyer": "monicamwangi@gmail.com",
+          "item": "chair",
+          "date": "2024-02-19 0000",
+          "amount": 30000,
+          "orderNo": "XW45SWR"
         }
-    ],
-    "users": [
+      ],
+      "merchandise": [
         {
-            "id": 1,
-            "firstName": "Nyagoro",
-            "lastName": "Minwa",
-            "username": "nyagoro@gmail.com",
-            "password": "Nyagoro123",
-            "type":"buyer"
-        },
-        {
-            "id": 2,
-            "firstName": "Ouma",
-            "lastName": "Arera",
-            "username": "oumaarera@sanaayetu.com",
-            "password": "Minwa@Nyagoro2024",
-            "type": "seller"
-        },
-        {
-            "id": 3,
-            "firstName": "Monica",
-            "lastName": "Mwangi",
-            "username": "monicamwangi@sanaayetu.com",
-            "password": "Monica@2024",
-            "type": "admin"
+          "id": 1,
+          "name": "Chair",
+          "quantity": 10,
+          "color": "black",
+          "size": "one seater",
+          "weight": "3kg",
+          "price": 1500,
+          "transport": 200,
+          "deliverytime": 3,
+          "category": "furniture",
+          "shopName": "Rambungfee Juakali",
+          "location": "Juja",
+          "reviews": [
+            {
+              "id": 1,
+              "sender": "monicamwangi@gmail.com",
+              "date": "2024-02-19 0000",
+              "status": "read",
+              "review": [
+                "dfghjsdffghjsdghjksdghjd",
+                "dfgshjdfghsjdfghjskdfghjksdg"
+              ],
+              "reply": [
+                "sdfghjdffghsjkdfghjkdf",
+                "xfghdvcvbnxc werrtyuiweghj"
+              ]
+            }
+          ],
+          "messages": [
+            {
+              "id": 1,
+              "sender": "monicamwangi@gmail.com",
+              "date": "2024-02-19 0000",
+              "status": "read",
+              "review": [
+                "dfghjsdffghjsdghjksdghjd",
+                "dfgshjdfghsjdfghjskdfghjksdg"
+              ],
+              "reply": [
+                "sdfghjdffghsjkdfghjkdf",
+                "xfghdvcvbnxc werrtyuiweghj"
+              ]
+            }
+          ],
+          "images": []
         }
-    ],
-    "sales":[
-        {
-            "id": 1,
-            "seller": "Rambungfee Juakali",
-            "buyer": "Nyagoro Minwa",
-            "orderNo": "SDGHJSDF5647863",
-            "date": "2024/02/19",
-            "cost": 3000,
-            "deliveryTime": 3,
-            "itemName": "kiondo",
-            "itemTransport": 200
-        }
-    ],
-    "apllicationReviews": [
-        {
-            "id": 1,
-            "sender": "monicamwangi@gmail.com",
-            "date":"2024-02-19 0000",
-            "review": ["dfghjtyuifg"],
-            "reply": ["sdfghjdffghsjkdfghjkdf"]
-        }
-    ]
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Nyagoro",
+      "lastName": "Minwa",
+      "username": "nyagoro@gmail.com",
+      "password": "Nyagoro123",
+      "type": "buyer"
+    },
+    {
+      "id": 2,
+      "firstName": "Ouma",
+      "lastName": "Arera",
+      "username": "oumaarera@sanaayetu.com",
+      "password": "Minwa@Nyagoro2024",
+      "type": "seller"
+    },
+    {
+      "id": 3,
+      "firstName": "Monica",
+      "lastName": "Mwangi",
+      "username": "monicamwangi@sanaayetu.com",
+      "password": "Monica@2024",
+      "type": "admin"
+    },
+    {
+      "firstName": "Ouma",
+      "lastName": "Arera",
+      "username": "mutuluerick@gmail.com",
+      "password": "d",
+      "type": "seller",
+      "id": 4
+    },
+    {
+      "firstName": "Ouma",
+      "lastName": "Arera",
+      "username": "wanjerigrammarly@gmail.com",
+      "password": "d",
+      "type": "seller",
+      "id": 5
+    },
+    {
+      "firstName": "gege",
+      "lastName": "Arera",
+      "username": "vemis20782@lanxi8.com",
+      "password": "d",
+      "type": "seller",
+      "id": 6
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "username": "arera@gmail.com",
+      "password": "Donmic#2021",
+      "type": "",
+      "id": 7
+    }
+  ],
+  "sales": [
+    {
+      "id": 1,
+      "seller": "Rambungfee Juakali",
+      "buyer": "Nyagoro Minwa",
+      "orderNo": "SDGHJSDF5647863",
+      "date": "2024/02/19",
+      "cost": 3000,
+      "deliveryTime": 3,
+      "itemName": "kiondo",
+      "itemTransport": 200
+    }
+  ],
+  "apllicationReviews": [
+    {
+      "id": 1,
+      "sender": "monicamwangi@gmail.com",
+      "date": "2024-02-19 0000",
+      "review": [
+        "dfghjtyuifg"
+      ],
+      "reply": [
+        "sdfghjdffghsjkdfghjkdf"
+      ]
+    }
+  ]
 }
