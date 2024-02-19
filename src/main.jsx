@@ -10,6 +10,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
     <Home />
     <Contact />
+    <About />
     
 
   </React.StrictMode>,
