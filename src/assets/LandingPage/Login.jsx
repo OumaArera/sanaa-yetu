@@ -1,0 +1,228 @@
+import React, { useState, useEffect } from "react";
+
+import "./Login.css";
+
+import closedEyeIcon from "../Images/closed.svg";
+import openEyeIcon from "../Images/open.svg";
+
+
+const url = "http://localhost:3000/users";
+
+const Login = () =>{
+
+    const [users, setUsers] = useState([]);
+    const [error, setError] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loginError, setLoginError] = useState("");
+    const [userType, setUserType] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [formData, setFormData] = useState({
+        username: "",
+        password: ""
+    });
+
+
+    const fetchData = async () =>{
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            if (response.ok) {
+                setUsers(data);
+            }else{
+                setError("There was an error fetching the data");
+                setLoginError("");
+            }
+        }catch(err){
+            console.log(err)
+            setError("There was an error fetching the data");
+            setLoginError("");
+        }
+    }
+
+    useEffect(() =>{
+        fetchData()
+    }, [])
+
+    /*
+    - Enable user to enter their username and password
+    - Targets the entered data and stores it for login
+    */ 
+    const handleChange = event =>{
+        const {name, value} = event.target;
+        setFormData(prevData =>({
+            ...prevData,
+            [name]: value,
+        }))
+    }
+    // Confirms user credentials 
+    const confirmCredentials = () =>{
+
+        // Check if there is data in the users state
+        if (users.length === 0) {
+            setError("Network error! Please wait as we this is being resolved");
+            setLoginError("");
+            return;
+        }
+
+        // Checks that user has entered the input fields
+        if (!formData.username || !formData.password) {
+            setLoginError("Please fill all the fields");
+            return;
+        }
+
+        /*
+        - Confirms that user exists in the database
+        - If user exists, checks the password and logs them in if password is correct
+        - If user password is incorrect, user is informed
+        -If user doesn't exist, user is informed to signup
+        */ 
+        const isUsernameExists = users.some(user => user.username === formData.username);
+        if (isUsernameExists) {
+            const user = users.find(
+                user => 
+                    user.username === formData.username && 
+                    user.password === formData.password);
+            if (user){
+                setIsLoggedIn(true);
+                localStorage.setItem("loggedInUser", formData.username);
+                localStorage.setItem("userType", user.type);
+                setUserType(user.type);
+                // Reset the logout timer upon successful login
+                resetLogoutTimer();
+            } else {
+                setLoginError("Invalid password");
+            }
+        } else {
+            setLoginError("This email is not registered, please signup.");
+        }
+    }
+
+    // Logs user out
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        localStorage.removeItem("loggedInUser");
+        localStorage.removeItem("userType");
+        clearTimeout(logoutTimer);
+        setLoginError(null)
+        setFormData({
+            username: "",
+            password: ""
+        })
+    };
+
+
+    // Variable to store the logout timer
+    let logoutTimer;
+
+
+    const resetLogoutTimer = () => {
+        clearTimeout(logoutTimer);
+        // Set the logout timer to log out the user after 2 minutes of inactivity
+        logoutTimer = setTimeout(() => {
+            handleLogout();
+        }, 120000); 
+    };
+
+    /*
+    - Keeps user logged in even when browser is refreshed. 
+    */ 
+    useEffect(() =>{
+        const loggedInUser = localStorage.getItem("loggedInUser");
+        const userLoggedIn = loggedInUser !== null;
+        if(userLoggedIn){
+            setIsLoggedIn(true);
+            setUserType(localStorage.getItem("userType"));
+            // Reset the logout timer upon initial login
+            resetLogoutTimer();
+        }
+        fetchData();
+    }, []);
+
+    // Event listeners for user actions to reset the logout timer
+    useEffect(() => {
+        const resetTimer = () => {
+            resetLogoutTimer();
+        };
+        // Add event listeners for various user actions
+        window.addEventListener("mousemove", resetTimer);
+        window.addEventListener("mousedown", resetTimer);
+        window.addEventListener("keypress", resetTimer);
+        window.addEventListener("touchmove", resetTimer);
+        return () => {
+            // Remove event listeners when the component unmounts
+            window.removeEventListener("mousemove", resetTimer);
+            window.removeEventListener("mousedown", resetTimer);
+            window.removeEventListener("keypress", resetTimer);
+            window.removeEventListener("touchmove", resetTimer);
+        };
+    }, []);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword((prevShowPassword) => !prevShowPassword);
+    };
+
+
+    return (
+        <div>
+            {
+            !isLoggedIn ?
+            (
+                <div id="login">
+                    <h2 id="signin-title">Sign in</h2>
+                    <br />
+                    <input 
+                        className="login"
+                        name="username" 
+                        value={formData.username} 
+                        type="text" 
+                        placeholder="Enter Username"
+                        onChange={handleChange}
+                    />
+
+                    <br />
+                    <div className="password-input">
+                        <input
+                            className="login"
+                            name="password"
+                            value={formData.password}
+                            type={showPassword ? "text" : "password"} // Toggle input type based on showPassword state
+                            placeholder="Enter password"
+                            onChange={handleChange}
+                        />
+                        <button className="toggle-password" onClick={togglePasswordVisibility}>
+                            <img 
+                            className="image"
+                            src={showPassword ? openEyeIcon : closedEyeIcon} 
+                            alt={showPassword ? "Hide" : "Show"} />
+                        </button>
+                    </div>
+                    {setLoginError && <p className="error" >{loginError}</p>}
+                    {setError && <p className="error" >{error}</p>}
+                    <button 
+                        onClick={confirmCredentials} 
+                        className="login-button"
+                    >
+                        Continue
+                    </button>
+                </div>
+            ): (
+                <div>
+                    {userType === "admin" && <p className="my-view">I am admin</p>}
+                    {userType === "buyer" && <p className="my-view">I am a buyer</p>}
+                    {userType === "seller" && <p className="my-view">I am a seller</p>}
+                    <button 
+                        onClick={handleLogout} 
+                        className="logout-button"
+                    >
+                        Sign out
+                    </button>
+                </div>
+            )
+            }
+        </div>
+    )
+
+}
+
+export default Login;
+
