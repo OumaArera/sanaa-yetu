@@ -2,8 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Ensures the content is centered vertically */
-    background-color: #f2f2f2; /* Add a background color for the container */
+    min-height: 100vh;
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
 }
 
 .about-card {
@@ -11,37 +12,51 @@
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    max-width: 800px; /* Limit the width of the card */
+    max-width: 800px;
+    margin: 20px;
 }
 
-/* Add styles for section headings */
+.section {
+    margin-bottom: 30px;
+}
+
 .section h3 {
     color: #333333;
     font-size: 24px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
 }
 
-/* Add styles for section paragraphs */
 .section p {
     color: #666666;
     font-size: 16px;
     line-height: 1.6;
+    margin-bottom: 15px;
 }
 
-/* Add styles for unordered lists */
-.section ul {
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+ul {
     list-style-type: none;
-    padding-left: 0;
-    margin-top: 0;
+    padding: 0;
 }
 
-/* Add styles for list items */
-.section li {
-    margin-bottom: 6px;
+ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
 }
 
-/* Add styles for separating lines between sections */
-.section:not(:last-child) {
-    border-bottom: 1px solid #eeeeee;
-    padding-bottom: 20px;
+ul li img {
+    margin-right: 15px;
+}
+
+ul li p {
+    margin: 0;
 }
