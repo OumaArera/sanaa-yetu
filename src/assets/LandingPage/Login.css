@@ -1,0 +1,64 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+#login{
+    margin-left: 10px;
+    top: 120px;
+    left: 700px;
+    position: absolute;
+}
+
+#after-login{
+    margin-left: 10px;
+    top: 120px;
+    left: 700px;
+    position: absolute;
+}
+
+#signin-title{
+    font-size: 2vw;
+}
+
+
+.login {
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 320px;
+    font-size: 1.1vw;
+}
+
+.login-button {
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.1vw;
+}
+
+.logout-button {
+    padding: 0.9rem 1.5rem;
+    color: #dc3545;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    margin: 10px;
+    font-size: 1.1vw;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 1.1vw;
+}
+
+.my-view{
+    font-size: 2vw;
+}
+
+.image{
+    border: none;
+    background-color: transparent;
+}

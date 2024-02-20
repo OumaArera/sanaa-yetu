@@ -1,0 +1,72 @@
+#first-details{
+    margin-left: 10px;
+    top: 250px;
+    left: 700px;
+    position: absolute;
+}
+
+#second-form{
+    margin-left: 10px;
+    top: 250px;
+    left: 700px;
+    position: absolute;
+}
+
+#create-account{
+    margin-left: 10px;
+    font-size: 2vw;
+    top: 120px;
+    left: 700px;
+    position: absolute;
+}
+
+#user-type{
+    font-size: 1.2vw;
+    width: 320px;
+    height: 45px;
+}
+
+.name{
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 320px;
+    font-size: 1.1vw;
+}
+
+#next{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.1vw;
+}
+
+.signup-error{
+    color: #dc3545;
+    font-size: 1.1vw;
+}
+
+.userName{
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 320px;
+    font-size: 1.1vw;
+}
+#signup{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.1vw;
+}
+
+#success{
+    font-size: 2vw;
+    color: goldenrod;
+}
