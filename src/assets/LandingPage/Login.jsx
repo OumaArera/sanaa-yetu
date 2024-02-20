@@ -206,7 +206,7 @@ const Login = () =>{
                     </button>
                 </div>
             ): (
-                <div>
+                <div id="after-login">
                     {userType === "admin" && <p className="my-view">I am admin</p>}
                     {userType === "buyer" && <p className="my-view">I am a buyer</p>}
                     {userType === "seller" && <p className="my-view">I am a seller</p>}

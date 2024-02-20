@@ -10,7 +10,7 @@ function App() {
     <Router>
       <div id="nav-bar">
         <header className="header">
-          <NavLink to={'/'}>
+          <NavLink to={'/#'}>
           </NavLink>
           <NavBar />
         </header>

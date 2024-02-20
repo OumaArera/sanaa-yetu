@@ -4,6 +4,16 @@
 
 #login{
     margin-left: 10px;
+    top: 120px;
+    left: 700px;
+    position: absolute;
+}
+
+#after-login{
+    margin-left: 10px;
+    top: 120px;
+    left: 700px;
+    position: absolute;
 }
 
 #signin-title{
@@ -51,5 +61,4 @@
 .image{
     border: none;
     background-color: transparent;
-    /* background: none; */
 }

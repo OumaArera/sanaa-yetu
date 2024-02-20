@@ -16,6 +16,7 @@ const Register = () =>{
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState("");
     const [users, setUsers] = useState([]);
+    const [signupSuccess, setSignupSuccess] = useState(false);
     const [newUser, setNewUser] = useState({
         firstName: "",
         lastName: "",
@@ -97,7 +98,7 @@ const Register = () =>{
         ) {
             return "";
         } else {
-            return "Password must contain at least one capital letter, one small letter, one number, one special character, and minimum length of 6 characters.";
+            return "Please set a complex password";
         }
     };
     
@@ -128,6 +129,17 @@ const Register = () =>{
             return;
         }
 
+        if (newUser.password.includes(newUser.firstName) || newUser.password.includes(newUser.lastName)) {
+            setError("Password cannot contain your name or username.");
+            return;
+        }
+
+        const strongPasswordError = isStrongPassword(newUser.password, newUser.firstName, newUser.lastName, newUser.username);
+        if (strongPasswordError) {
+            setError(strongPasswordError);
+            return;
+        }
+
         try {
             
             const response = await fetch(url, {
@@ -139,7 +151,8 @@ const Register = () =>{
                 body: JSON.stringify(newUser)
             })
             if (response.ok){
-                alert("Signup successful!")
+                // alert("Signup successful!")
+                setSignupSuccess(true);
                 const data = await response.json();
                 localStorage.setItem("newUser", JSON.stringify(data));
                 setNewUser({
@@ -166,6 +179,12 @@ const Register = () =>{
     const toggleConfirmPasswordVisibility = () => {
         setShowConfirmPassword(prevShowConfirmPassword => !prevShowConfirmPassword);
     };
+
+    if (signupSuccess) {
+        return (
+            <p id="success">Signup successful...</p>
+        );
+    }
 
 
     return (
