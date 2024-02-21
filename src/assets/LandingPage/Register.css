@@ -12,6 +12,13 @@
     position: absolute;
 }
 
+#third-form{
+    margin-left: 10px;
+    top: 250px;
+    left: 700px;
+    position: absolute;
+}
+
 #create-account{
     margin-left: 10px;
     font-size: 2vw;
