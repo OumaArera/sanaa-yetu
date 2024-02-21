@@ -1,0 +1,45 @@
+.search-bar{
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 750px;
+    font-size: 1.1vw;
+    top: 120px;
+    left: 520px;
+    position: absolute;
+
+}
+
+.display{
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 750px;
+    /* height: 500px; */
+    font-size: 1.1vw;
+    /* /* top: 200px; */
+    /* left: 520px; */
+    /* position: absolute; */
+}
+
+#add-to-cart{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.1vw;
+}
+
+.images{
+    width: 250px;
+    height: 250px;
+}
+
+#search{
+    top: 200px;
+    left: 520px;
+    position: absolute;
+}

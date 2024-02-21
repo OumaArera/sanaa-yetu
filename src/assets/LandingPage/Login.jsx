@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import "./Login.css";
+import DisplayDetails from "../Buyer/DisplayDetails";
+import Cart from "../Buyer/Cart";
 
 import closedEyeIcon from "../Images/closed.svg";
 import openEyeIcon from "../Images/open.svg";
@@ -10,9 +12,11 @@ const url = "http://localhost:3000/users";
 
 const Login = () =>{
 
+
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loggedInUser, setLoggedInUser] = useState([]);
     const [loginError, setLoginError] = useState("");
     const [userType, setUserType] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -21,6 +25,7 @@ const Login = () =>{
         password: ""
     });
 
+    // const userId = loggedInUser.id;
 
     const fetchData = async () =>{
         try {
@@ -37,11 +42,26 @@ const Login = () =>{
             setError("There was an error fetching the data");
             setLoginError("");
         }
-    }
+    };
+
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("loggedInUser");
+        const userType = localStorage.getItem("userType");
+        if (loggedInUser && userType) {
+            setIsLoggedIn(true);
+            setUserType(userType);
+            setLoggedInUser(JSON.parse(loggedInUser)); 
+            // Reset the logout timer upon initial login
+            resetLogoutTimer();
+        }
+        fetchData(); 
+    }, []);
 
     useEffect(() =>{
         fetchData()
     }, [])
+
 
     /*
     - Enable user to enter their username and password
@@ -54,6 +74,8 @@ const Login = () =>{
             [name]: value,
         }))
     }
+
+
     // Confirms user credentials 
     const confirmCredentials = () =>{
 
@@ -70,6 +92,7 @@ const Login = () =>{
             return;
         }
 
+
         /*
         - Confirms that user exists in the database
         - If user exists, checks the password and logs them in if password is correct
@@ -84,8 +107,9 @@ const Login = () =>{
                     user.password === formData.password);
             if (user){
                 setIsLoggedIn(true);
-                localStorage.setItem("loggedInUser", formData.username);
+                setLoggedInUser(user);
                 localStorage.setItem("userType", user.type);
+                localStorage.setItem("loggedInUser", JSON.stringify(user)); // Store user object as string
                 setUserType(user.type);
                 // Reset the logout timer upon successful login
                 resetLogoutTimer();
@@ -97,6 +121,7 @@ const Login = () =>{
         }
     }
 
+
     // Logs user out
     const handleLogout = () => {
         setIsLoggedIn(false);
@@ -104,6 +129,7 @@ const Login = () =>{
         localStorage.removeItem("userType");
         clearTimeout(logoutTimer);
         setLoginError(null)
+        setLoggedInUser('')
         setFormData({
             username: "",
             password: ""
@@ -123,6 +149,7 @@ const Login = () =>{
         }, 120000); 
     };
 
+
     /*
     - Keeps user logged in even when browser is refreshed. 
     */ 
@@ -137,6 +164,7 @@ const Login = () =>{
         }
         fetchData();
     }, []);
+
 
     // Event listeners for user actions to reset the logout timer
     useEffect(() => {
@@ -156,6 +184,7 @@ const Login = () =>{
             window.removeEventListener("touchmove", resetTimer);
         };
     }, []);
+
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -207,15 +236,59 @@ const Login = () =>{
                 </div>
             ): (
                 <div id="after-login">
-                    {userType === "admin" && <p className="my-view">I am admin</p>}
-                    {userType === "buyer" && <p className="my-view">I am a buyer</p>}
-                    {userType === "seller" && <p className="my-view">I am a seller</p>}
-                    <button 
-                        onClick={handleLogout} 
-                        className="logout-button"
-                    >
-                        Sign out
-                    </button>
+                    {isLoggedIn && (
+                        <div id="after-login">
+                            {userType === "admin" && (
+                                <>
+                                    <p className="my-view">Welcome, {loggedInUser.firstName} {loggedInUser.lastName}!</p>
+                                    <button 
+                                        onClick={handleLogout} 
+                                        className="logout-button"
+                                    >
+                                        Sign out
+                                    </button>
+                                    <DisplayDetails 
+                                        user={loggedInUser}
+                                    />
+                                </>
+                            )}
+                            {userType === "buyer" && (
+                                <>
+                                    <p className="my-view">Welcome, {loggedInUser.firstName} {loggedInUser.lastName}!</p>
+                                    <button 
+                                        onClick={handleLogout} 
+                                        className="logout-button"
+                                    >
+                                        Sign out
+                                    </button>
+                                    <DisplayDetails 
+                                        user={loggedInUser} 
+                                    />
+                                    <div className="cart">
+                                        <Cart loggedInUser={loggedInUser} />
+                                    </div>
+                                </>
+                            )}
+                            {userType === "seller" && (
+                                <>
+                                    <p className="my-view">Welcome, {loggedInUser.firstName} {loggedInUser.lastName}!</p>
+                                    <button 
+                                        onClick={handleLogout} 
+                                        className="logout-button"
+                                    >
+                                        Sign out
+                                    </button>
+                                    <DisplayDetails
+                                        user={loggedInUser} 
+                                    />
+                                    <div className="cart">
+                                        <Cart loggedInUser={loggedInUser} />
+                                    </div>
+                                </>
+                            )}
+                            
+                        </div>
+                    )}
                 </div>
             )
             }
@@ -225,4 +298,5 @@ const Login = () =>{
 }
 
 export default Login;
+
 
