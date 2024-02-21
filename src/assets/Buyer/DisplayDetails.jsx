@@ -11,8 +11,7 @@ const DisplayDetails = ({ user }) => {
     const [fetchError, setFetchError] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
     const [errorItem, setErrorItem] = useState(null)
-    const [itemAddToCartSuccess, setItemAddToCartSuccess] = useState("")
-    const [monitorItemAddSuccess, setMonitorItemAddSuccess] = useState(null)
+    const [addedItemIds, setAddedItemIds] = useState([]);
     const [error, setError] = useState("")
 
 
@@ -135,13 +134,9 @@ const DisplayDetails = ({ user }) => {
                 setError("Failed to update user data");
                 return; // Return early if there's an error updating user data
             }
-    
-            // Show success message
-            setMonitorItemAddSuccess(item);
-            setItemAddToCartSuccess("Added to your cart");
+            setAddedItemIds(prevIds => [...prevIds, item.id]);
             setTimeout(() =>{
-                setItemAddToCartSuccess("");
-                setMonitorItemAddSuccess(null);
+                setAddedItemIds("")
             }, 2000);
         } catch (error) {
             console.error(error);
@@ -175,7 +170,7 @@ const DisplayDetails = ({ user }) => {
                         </p>
                     </div>
                     {errorItem && errorItem.id === item.id && <p style={{color: "red"}}>{error}</p>}
-                    {itemAddToCartSuccess && <p style={{color: "green"}}>{itemAddToCartSuccess}</p>}
+                    {addedItemIds.includes(item.id) && <p style={{color: "green"}}>Added to your cart</p>}
                     <button onClick={() => handleAddToCart(item)} id="add-to-cart">Add to cart</button>
                 </div>
             ))}

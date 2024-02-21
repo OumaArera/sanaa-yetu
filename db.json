@@ -91,7 +91,32 @@
       "username": "nyagoro@gmail.com",
       "password": "Nyagoro123",
       "messages": [],
-      "incart": [],
+      "incart": [
+        {
+          "id": "e2d7cfc7-3992-4bc0-98d1-ba755e984169",
+          "timeStamp": "2024-02-21T23:37:59.410Z",
+          "username": "nyagoro@gmail.com",
+          "seller": "oumaarera@sanaayetu.com",
+          "images": [
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r"
+          ],
+          "name": "Chair",
+          "price": 1500,
+          "shopName": "Rambungfee Juakali",
+          "quantity": 10,
+          "color": "black",
+          "size": "one seater",
+          "weight": "3kg",
+          "transport": 200,
+          "deliverytime": 3,
+          "class": "Juakali",
+          "category": "furniture",
+          "location": "Juja",
+          "messages": []
+        }
+      ],
       "pastorders": [],
       "type": "buyer",
       "otherdetails": []
@@ -103,26 +128,7 @@
       "status": "active",
       "username": "oumaarera@sanaayetu.com",
       "password": "Minwa@Nyagoro2024",
-      "messages": [
-        {
-          "id": "97d0229e-a80e-427f-9a3b-33486aa419b7",
-          "sender": "mutuluerick@gmail.com",
-          "text": "sdfgsdfgh",
-          "timeStamp": "2024-02-21T22:51:24.089Z"
-        },
-        {
-          "id": "f092c32c-13a6-4ce4-a3ad-029a9515a3f2",
-          "sender": "mutuluerick@gmail.com",
-          "text": "",
-          "timeStamp": "2024-02-21T22:54:21.451Z"
-        },
-        {
-          "id": "e5d1aebd-fd5a-4bbb-a0c4-d5ec81f5c6ae",
-          "sender": "mutuluerick@gmail.com",
-          "text": "Last item",
-          "timeStamp": "2024-02-21T23:02:12.782Z"
-        }
-      ],
+      "messages": [],
       "incart": [],
       "pastorders": [],
       "type": "seller",
@@ -151,26 +157,96 @@
       "type": "seller",
       "otherdetails": [],
       "id": 4,
-      "messages": [
+      "messages": []
+    },
+    {
+      "id": "9504af05-6eba-4906-8ce9-79b30ae030ec",
+      "firstName": "Ouma",
+      "lastName": "Arera",
+      "username": "mutuluerick@gmail.com",
+      "password": "Mutulu$123",
+      "type": "buyer",
+      "incart": [
         {
-          "id": "97d0229e-a80e-427f-9a3b-33486aa419b7",
-          "sender": "mutuluerick@gmail.com",
-          "text": "sdfgsdfgh",
-          "timeStamp": "2024-02-21T22:51:24.089Z"
+          "id": "14c07c1d-4987-4d1f-b9eb-f9b97ae51a9d",
+          "timeStamp": "2024-02-21T23:43:17.605Z",
+          "username": "mutuluerick@gmail.com",
+          "seller": "oumaarera@sanaayetu.com",
+          "images": [
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r"
+          ],
+          "name": "Chair",
+          "price": 1500,
+          "shopName": "Rambungfee Juakali",
+          "quantity": 10,
+          "color": "black",
+          "size": "one seater",
+          "weight": "3kg",
+          "transport": 200,
+          "deliverytime": 3,
+          "class": "Juakali",
+          "category": "furniture",
+          "location": "Juja",
+          "messages": []
         },
         {
-          "id": "f092c32c-13a6-4ce4-a3ad-029a9515a3f2",
-          "sender": "mutuluerick@gmail.com",
-          "text": "",
-          "timeStamp": "2024-02-21T22:54:21.451Z"
+          "id": "c1a6e743-4bdb-48f1-8fad-ea4ce1b670c2",
+          "timeStamp": "2024-02-21T23:43:20.960Z",
+          "username": "mutuluerick@gmail.com",
+          "seller": "oumaarera@sanaayetu.com",
+          "images": [
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r"
+          ],
+          "name": "Pot",
+          "price": 1500,
+          "shopName": "Rambungfee Juakali",
+          "quantity": 10,
+          "color": "black",
+          "size": "one seater",
+          "weight": "3kg",
+          "transport": 200,
+          "deliverytime": 3,
+          "class": "Juakali",
+          "category": "furniture",
+          "location": "Juja",
+          "messages": []
         },
         {
-          "id": "e5d1aebd-fd5a-4bbb-a0c4-d5ec81f5c6ae",
-          "sender": "mutuluerick@gmail.com",
-          "text": "Last item",
-          "timeStamp": "2024-02-21T23:02:12.782Z"
+          "id": "8ae9c15c-902f-4bb5-bada-d9c6caafab83",
+          "timeStamp": "2024-02-21T23:52:38.349Z",
+          "username": "mutuluerick@gmail.com",
+          "seller": "oumaarera@sanaayetu.com",
+          "images": [
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r"
+          ],
+          "name": "Table",
+          "price": 1500,
+          "shopName": "Rambungfee Juakali",
+          "quantity": 10,
+          "color": "black",
+          "size": "one seater",
+          "weight": "3kg",
+          "transport": 200,
+          "deliverytime": 3,
+          "class": "Juakali",
+          "category": "furniture",
+          "location": "Juja",
+          "messages": []
         }
-      ]
+      ],
+      "pastorders": [],
+      "otherdetails": {
+        "shopName": "",
+        "location": "",
+        "class": "",
+        "category": ""
+      }
     }
   ],
   "sales": [],

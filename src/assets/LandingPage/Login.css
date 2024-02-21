@@ -50,6 +50,17 @@
     position: absolute;
 }
 
+.show-cart{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    top: 120px;
+    right: 180px;
+    position: absolute;
+    border-radius: 20px;
+
+}
+
 .cart{
     width: 300px;
     top: 250px;
