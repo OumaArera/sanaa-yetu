@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import "./DisplayDetails.css";
 
 const sellersUrl = "http://localhost:3000/merchandise";
@@ -88,13 +88,13 @@ const DisplayDetails = ({ user }) => {
             }
 
             // Generate a unique id for the itemTo add
-            const itemId = uuidv4();
+            // const itemId = uuidv4();
             // Create timeStamp when the item is added to cart.
             const currentTime = new Date().toISOString();
 
             const itemToAdd = {
                 
-                id: itemId,
+                id: item.id,
                 timeStamp: currentTime,
                 username: user.username,
                 seller: item.username,

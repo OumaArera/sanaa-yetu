@@ -26,7 +26,7 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     width: 320px;
-    font-size: 1.1vw;
+    font-size: 1.2vw;
 }
 
 .login-button {
@@ -61,8 +61,17 @@
 
 }
 
+.toggle-password{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    border: none;
+    border-radius: 10px;
+}
+
 .cart{
-    width: 300px;
+    width: 500px;
+    /* background-color: #ccc; */
     top: 250px;
     right: 20px;
     position: absolute;
@@ -77,7 +86,3 @@
     font-size: 2vw;
 }
 
-.image{
-    border: none;
-    background-color: transparent;
-}

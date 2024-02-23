@@ -227,7 +227,7 @@ const Login = () =>{
                         />
                         <button className="toggle-password" onClick={togglePasswordVisibility}>
                             <img 
-                            className="image"
+                            className="show-image"
                             src={showPassword ? openEyeIcon : closedEyeIcon} 
                             alt={showPassword ? "Hide" : "Show"} />
                         </button>
