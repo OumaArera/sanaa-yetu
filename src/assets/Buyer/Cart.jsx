@@ -19,39 +19,47 @@ const Cart = ({ loggedInUser }) => {
     const [users, setUsers] = useState([]);
     const [userToMapMessages, setUserToMapMessages] = useState([])
     const [paymentMethod, setPaymentMethod] = useState("")
-    const [itemToBuy, setItemToBuy] = useState({});
     const [processingTransaction, setProcessingTransaction] = useState(1);
     const [phoneNumber, setPhoneNumber] = useState({});
     const [enterPhoneNumber, setEnterPhoneNumber] = useState(false);
     const [phoneNumberError, setPhoneNumberError] = useState("");
-    const [transactionError, setTransactionError] = useState("")
+    const [transactionError, setTransactionError] = useState("");
+    const [buyItem, setBuyItem] = useState(false);
+    const [itemToBuy, setItemToBuy] = useState({});
+    const [confirm, setConfirm] = useState(false);
+    const [location, setLocation] = useState(null)
+
+
+    useEffect(() =>{
 
     
-    const fetchItemsInCart = async () => {
-        try {
-            const response = await fetch(`${userUrl}/${loggedInUser.id}`);
-            if (response.ok) {
-                const data = await response.json();
+        const fetchItemsInCart = async () => {
+            try {
+                const response = await fetch(`${userUrl}/${loggedInUser.id}`);
+                if (response.ok) {
+                    const data = await response.json();
 
-                setItemsInCart(data.incart);
-                setUserToMapMessages(data.messages)
-                // Initialize text messages for each item
-                const initialMessages = {};
-                data.incart.forEach(item => {
-                    initialMessages[item.id] = { text: "" };
-                });
-                setTextMessages(initialMessages);
-            } else {
-                setError("There was a network error in getting your items!");
+                    setItemsInCart(data.incart);
+                    setUserToMapMessages(data.messages)
+                    // Initialize text messages for each item
+                    const initialMessages = {};
+                    data.incart.forEach(item => {
+                        initialMessages[item.id] = { text: "" };
+                    });
+                    setTextMessages(initialMessages);
+                } else {
+                    setError("There was a network error in getting your items!");
+                }
+            } catch (err) {
+                console.error(err);
+                setError("There was an error getting your items!");
             }
-        } catch (err) {
-            console.error(err);
-            setError("There was an error getting your items!");
-        }
-    };
-    useEffect(() => {
+        };
+    
         fetchItemsInCart();
+    }, [])
 
+    useEffect(() => {
         const fetchSellers = async () => {
             try {
                 const response = await fetch(sellerUrl);
@@ -203,8 +211,22 @@ const Cart = ({ loggedInUser }) => {
     }
 
 
-    const handleBuyItem = item =>{
+    const handleBuyItem = () =>{
         // const orderNumberGenerator = "XYRDE";
+        
+        setBuyItem(true);
+    }
+
+    const handlePhoneNummber = event =>{
+        const {name, value} = event.target;
+        setPhoneNumber(prevValue =>({
+            ...prevValue,
+            [name]: value,
+        }))
+    }
+
+    const processTransaction = item =>{
+        getLocation();
         const timeStamp = new Date().toString();
         // Calculate the amount to pay
         let amountToPay = parseInt(item.price)+ parseInt(item.transport);
@@ -213,12 +235,16 @@ const Cart = ({ loggedInUser }) => {
 
             firstName: loggedInUser.firstName,
             lastName: loggedInUser.lastName,
+            phone: phoneNumber.phone,
+            buyer: loggedInUser.username,
+            buyerLocation: location,
             seller: item.seller,
             image: item.images[0], 
             price: item.price,
             color: item.color,
             weight: item.weight,
             shopName: item.shopName,
+            size: item.size,
             class: item.class,
             category: item.category,
             deliverytime: item.deliverytime,
@@ -234,23 +260,15 @@ const Cart = ({ loggedInUser }) => {
             id: uuidv4()
         };
         setItemToBuy(detailsToSave)
-        setProcessingTransaction(2)
+        setConfirm(true)
+        // const confirmation = confirm("Do you want to proceed with transaction?")
+        // if (confirmation){
+            
+        // }
+        
     }
 
-    // Dispalys third part of the transaction
-    const handleProceedWithPayment = () =>{
-        setProcessingTransaction(3)
-    }
-
-    const handlePhoneNummber = event =>{
-        const {name, value} = event.target;
-        setPhoneNumber(prevValue =>({
-            ...prevValue,
-            [name]: value,
-        }))
-    }
-
-    const confirmPayment = () =>{
+    const confirmPayment = ()  =>{
 
         const updateSeller = Array.isArray(users) && users.find(user => user.username === itemToBuy.seller);
 
@@ -260,10 +278,9 @@ const Cart = ({ loggedInUser }) => {
             sales: [...updateSeller.sales, itemToBuy]
         }
         
-        fetchItemsInCart();
         const pastOrders = {
             ...loggedInUser,
-            pastorders: [...loggedInUser.pastorders, itemToBuy]
+            pastorders: [...loggedInUser.pastorders, itemToBuy],
         }
 
         // const quantityToUpdate = parseInt(processingTransaction.quantity) - 1;
@@ -272,7 +289,7 @@ const Cart = ({ loggedInUser }) => {
 
         if (number.length >= 10){
 
-            const updateQuantity = async () =>{
+            const updateQuantity = async ()=>{
                 try{
                     const quantityToUpdate = await fetch(`${sellerUrl}/${itemToBuy.itemId}`, {
                         method: "PATCH",
@@ -283,6 +300,7 @@ const Cart = ({ loggedInUser }) => {
                         body: JSON.stringify({quantity: updatedItemQuantity})
                     })
                     if (quantityToUpdate.ok){
+                        // alert("Quantity updaed!")
                         const updateTransactionToSeller = await fetch(`${userUrl}/${updateSeller.id}`,{
                             method: "PATCH",
                             headers: {
@@ -305,11 +323,12 @@ const Cart = ({ loggedInUser }) => {
                             },
                             body: JSON.stringify(itemToBuy)
                         })
-                        // if (postTransaction.ok){
+                        if (postTransaction.ok){
+                            // alert("Sales updated!")
                             
-                        // }else{
-                        //     alert("Back at it!")
-                        // }
+                        }else{
+                            // alert("Back at it!")
+                        }
                         const updateItemInPastOrders = await fetch(`${userUrl}/${loggedInUser.id}`, {
                             method: "PATCH",
                             headers: {
@@ -319,18 +338,20 @@ const Cart = ({ loggedInUser }) => {
                             body: JSON.stringify(pastOrders)
                         })
                         if (updateItemInPastOrders.ok){
-
                             // handleDeleteItem(item)
-                            alert("You're crazy!")
+                            setProcessingTransaction(2)
+                            // alert("You're crazy!")
+                            
+                            
                         }else{
-                            alert("Kidogo tu!")
+                            // alert("Kidogo tu!")
                         }
 
                     }
 
                     // alert("Ouch!")
                 }catch(err){
-                    alert("Ouch! Ouch!")
+                    // alert("Ouch! Ouch!")
                     console.log(err)
                     setTransactionError("There was an error posting the transaction")
                 }
@@ -343,37 +364,11 @@ const Cart = ({ loggedInUser }) => {
             alert("No phone number")
             setPhoneNumberError("Please enter a valid phone number")
         }
+        
  
     }
 
-    const removeItemAfterPurchase = async () =>{
-        try{
-            // fetchItemsInCart();
-
-            const updatedUser = { ...loggedInUser };
-            updatedUser.incart = updatedUser.incart.filter(cartItem => cartItem.id !== itemToBuy.itemId);
-
-
-            
-            const removeItemFromCart = await fetch(`${userUrl}/${loggedInUser.id}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json"
-                },
-                body: JSON.stringify(updatedUser)
-            })
-            if (removeItemFromCart.ok){
-                alert("Hurray!")
-            }else{
-                alert("Kidogo!")
-            }
-
-        }catch(err){
-            console.log(err)
-            alert("That did not work")
-        }
-    }
+    
 
     const handleDeleteItem = async item =>{
         // alert(`Can delete by the way! ${item.name}`)
@@ -395,11 +390,28 @@ const Cart = ({ loggedInUser }) => {
 
         }catch(err){
             console.log(err)
-            alert("Aje sasa?")
+            // alert("Aje sasa?")
         }
 
     }
 
+    const getLocation = () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            position => {
+              const { latitude, longitude } = position.coords;
+              setLocation({ latitude, longitude });
+            },
+            error => {
+              console.error('Error getting location:', error);
+            }
+          );
+        } else {
+          console.error('Geolocation is not supported by this browser.');
+        }
+    };
+    
+    
 //___________________________________________________________________________________________________________ 
 
     return (
@@ -472,85 +484,92 @@ const Cart = ({ loggedInUser }) => {
                             <img className="delete-item-btn" src={deleteIcon} alt="Delete" />
                         </button>
                     </div>
+
+                    {buyItem &&(
+                        <div className="part-two-transaction">
+                        <p className="details">Order #{itemToBuy.orderNumber}</p>
+                        <p className="details">Total: KES {itemToBuy.total}</p>
+                        <p id="payment">Please select your payment method</p>
+                            <br />
+                            <input 
+                                type="radio" 
+                                className="payment-method"
+                                name="payment"
+                                value="Mpesa"
+                                onChange={handlePaymentChange}
+                            />
+                            Mpesa
+                            <br />
+                            <br />
+                            <input 
+                                type="radio" 
+                                className="payment-method"
+                                name="payment"
+                                value="Airtel Money"
+                                onChange={handlePaymentChange}
+                            />
+                            Airtel Money
+                            <br />
+                            <br />
+                            <input 
+                                type="radio" 
+                                className="payment-method"
+                                name="payment"
+                                value="T-Cash"
+                                onChange={handlePaymentChange}
+                            />
+                            T-Cash
+                            <br />
+                            {enterPhoneNumber && (
+                                <input 
+                                type="number" 
+                                name="phone"
+                                placeholder="Enter Phone number"
+                                className="phone-number"
+                                value={phoneNumber.phone}
+                                onChange={handlePhoneNummber}
+                            />
+                            )}
+                            <br />
+                            <br />
+                            <br />
+                            {!confirm && (
+                                <button
+                                className="proceed"
+                                onClick={() => processTransaction(item)}
+                                >
+                                    Proceed
+                                </button>
+                            )
+                            }
+                            {confirm &&(
+                                <button onClick={() => {
+                                    confirmPayment()
+                                    handleDeleteItem(item)
+                                    }} className="proceed">Confirm
+                                </button>
+                            )}
+                            
+                    </div>
+                    )
+
+                    }
                 </div>
             ))}
             {processingTransaction === 2 && (
                 <div className="items-in-cart">
+                    <p className="sucess">Transaction Successful! The {itemToBuy.name} will be delivered within {itemToBuy.deliverytime} days.</p>
                     <img className="images" src={itemToBuy.image} alt={itemToBuy.name} />
                     <p className="details">Name: {itemToBuy.name}</p>
-                    <p className="details">Price: {itemToBuy.price}</p>
+                    <p className="details">Cost:  KES {itemToBuy.total}</p>
                     <p className="details">Shop Name: {itemToBuy.shopName}</p>
-                    <p className="details">Quantity: {itemToBuy.quantity}</p>
+                    <p className="details">Order: #{itemToBuy.orderNumber}</p>
                     <p className="details">Color: {itemToBuy.color}</p>
                     <p className="details">Size: {itemToBuy.size}</p>
                     <p className="details">Weight: {itemToBuy.weight}</p>
-                    <p className="details">Shipping cost within Nairobi: {itemToBuy.transport}</p>
-                    <p className="details">Delivery time: {itemToBuy.deliverytime}</p>
-                    <p className="details">Class: {itemToBuy.class}</p>
-                    <p className="details">Category: {itemToBuy.category}</p>
                     
-                    <div className="select-payment-method">
-                        <br />
-                        <button onClick={handleProceedWithPayment} className="proceed">Proceed</button>
-                    </div>
                 </div>
             )
-            }
-            {processingTransaction === 3 &&(
-                <div className="part-two-transaction">
-                    <p className="details">Order #{itemToBuy.orderNumber}</p>
-                    <p className="details">Total: KES {itemToBuy.total}</p>
-                    <p id="payment">Please select your payment method</p>
-                        <br />
-                        <input 
-                            type="radio" 
-                            className="payment-method"
-                            name="payment"
-                            value="Mpesa"
-                            onChange={handlePaymentChange}
-                        />
-                        Mpesa
-                        <br />
-                        <br />
-                        <input 
-                            type="radio" 
-                            className="payment-method"
-                            name="payment"
-                            value="Airtel Money"
-                            onChange={handlePaymentChange}
-                        />
-                        Airtel Money
-                        <br />
-                        <br />
-                        <input 
-                            type="radio" 
-                            className="payment-method"
-                            name="payment"
-                            value="T-Cash"
-                            onChange={handlePaymentChange}
-                        />
-                        T-Cash
-                        <br />
-                        {enterPhoneNumber && (
-                            <input 
-                            type="number" 
-                            name="phone"
-                            placeholder="Enter Phone number"
-                            className="phone-number"
-                            value={phoneNumber.phone}
-                            onChange={handlePhoneNummber}
-                        />
-                        )}
-                        <br />
-                        <br />
-                        <br />
-                        <button onClick={() => {
-                            confirmPayment()
-                            removeItemAfterPurchase()
-                            }} className="proceed">Confirm</button>
-                </div>
-            )
-
             }
         </div>
     );
