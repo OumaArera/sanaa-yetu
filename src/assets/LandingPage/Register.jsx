@@ -34,8 +34,10 @@ const Register = () =>{
         password: "",
         type: "",
         incart: [],
+        sales: [],
         pastorders: [],
-        otherdetails: {}
+        otherdetails: {},
+        messages: []
     });
 
     const isValidEmail = email => {
@@ -183,8 +185,10 @@ const Register = () =>{
                     password: "",
                     type: "",
                     incart: [],
+                    sales: [],
                     pastorders: [],
-                    otherdetails: {}
+                    otherdetails: {},
+                    messages: []
                 })
             }else{
                 setError("There was an error signing up!");

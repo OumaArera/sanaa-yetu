@@ -6,6 +6,7 @@ import Cart from "../Buyer/Cart";
 
 import closedEyeIcon from "../Images/closed.svg";
 import openEyeIcon from "../Images/open.svg";
+import cart from "../Images/cart.svg"
 
 
 const url = "http://localhost:3000/users";
@@ -20,6 +21,7 @@ const Login = () =>{
     const [loginError, setLoginError] = useState("");
     const [userType, setUserType] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [showCart, setShowCart] = useState(false)
     const [formData, setFormData] = useState({
         username: "",
         password: ""
@@ -191,6 +193,11 @@ const Login = () =>{
     };
 
 
+    const handleShowCart = () => {
+        setShowCart(prevShowCart => !prevShowCart); 
+    };
+
+
     return (
         <div>
             {
@@ -220,7 +227,7 @@ const Login = () =>{
                         />
                         <button className="toggle-password" onClick={togglePasswordVisibility}>
                             <img 
-                            className="image"
+                            className="show-image"
                             src={showPassword ? openEyeIcon : closedEyeIcon} 
                             alt={showPassword ? "Hide" : "Show"} />
                         </button>
@@ -264,9 +271,14 @@ const Login = () =>{
                                     <DisplayDetails 
                                         user={loggedInUser} 
                                     />
-                                    <div className="cart">
-                                        <Cart loggedInUser={loggedInUser} />
-                                    </div>
+                                    <button className="show-cart" onClick={handleShowCart}>
+                                        <img src={cart} alt="Show Cart" />
+                                     </button>
+                                    {showCart && (
+                                        <div className="cart">
+                                            <Cart loggedInUser={loggedInUser} />
+                                        </div>
+                                    )}
                                 </>
                             )}
                             {userType === "seller" && (
@@ -281,9 +293,14 @@ const Login = () =>{
                                     <DisplayDetails
                                         user={loggedInUser} 
                                     />
-                                    <div className="cart">
-                                        <Cart loggedInUser={loggedInUser} />
-                                    </div>
+                                     <button className="show-cart" onClick={handleShowCart}>
+                                        <img src={cart} alt="Show Cart" />
+                                     </button>
+                                    {showCart && (
+                                        <div className="cart">
+                                            <Cart loggedInUser={loggedInUser} />
+                                        </div>
+                                    )}
                                 </>
                             )}
                             
