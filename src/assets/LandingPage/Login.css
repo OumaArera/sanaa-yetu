@@ -1,0 +1,88 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+#login{
+    margin-left: 10px;
+    top: 120px;
+    left: 700px;
+    position: absolute;
+}
+
+.my-view{
+    top: 60px;
+    left: 20px;
+    position: absolute;
+}
+
+#signin-title{
+    font-size: 2vw;
+}
+
+
+.login {
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 320px;
+    font-size: 1.2vw;
+}
+
+.login-button {
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.1vw;
+}
+
+.logout-button {
+    padding: 0.9rem 1.5rem;
+    color: #dc3545;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 1.1vw;
+    top: 120px;
+    right: 20px;
+    position: absolute;
+}
+
+.show-cart{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    top: 120px;
+    right: 180px;
+    position: absolute;
+    border-radius: 20px;
+
+}
+
+.toggle-password{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    border: none;
+    border-radius: 10px;
+}
+
+.cart{
+    width: 500px;
+    /* background-color: #ccc; */
+    top: 250px;
+    right: 20px;
+    position: absolute;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 1.1vw;
+}
+
+.my-view{
+    font-size: 2vw;
+}
+

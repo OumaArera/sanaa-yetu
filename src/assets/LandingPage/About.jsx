@@ -2,6 +2,7 @@ import React from 'react';
 import './About.css'; // Import CSS file for styling
 
 const About = () => {
+
     return (
         <div className="about-card">
             <h2>About Us</h2>
@@ -30,6 +31,8 @@ const About = () => {
                 <p>If you have any suggestions or comments, please feel free to reach out to us!</p>
             </div>
         </div>
+
+
     );
 }
 

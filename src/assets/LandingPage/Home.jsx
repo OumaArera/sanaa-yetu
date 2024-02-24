@@ -8,6 +8,7 @@ import image5 from '../Images/image5.jpg'
 import './Home.css';
 
 const Home = () => {
+
   return (
     <div className="container">
       <h1 className="title">
@@ -22,6 +23,7 @@ const Home = () => {
         <div className="card-info">
           <p>SanaaYetu Marketplace is a platform empowering artisans to showcase and sell their crafts while connecting them with buyers through an intuitive interface.</p>
         </div>
+
       </div>
        
     </div>
