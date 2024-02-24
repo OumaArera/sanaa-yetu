@@ -3,10 +3,12 @@ import React, { useState, useEffect } from "react";
 import "./Login.css";
 import DisplayDetails from "../Buyer/DisplayDetails";
 import Cart from "../Buyer/Cart";
+import Orders from "../Buyer/Orders";
 
 import closedEyeIcon from "../Images/closed.svg";
 import openEyeIcon from "../Images/open.svg";
-import cart from "../Images/cart.svg"
+import cart from "../Images/cart.svg";
+import orders from "../Images/bag.svg"
 
 
 const url = "http://localhost:3000/users";
@@ -21,7 +23,9 @@ const Login = () =>{
     const [loginError, setLoginError] = useState("");
     const [userType, setUserType] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [showCart, setShowCart] = useState(false)
+    const [showCart, setShowCart] = useState(false);
+    const [showOrders, setShowOrders] = useState(false);
+    const [control, setControl] = useState(1)
     const [formData, setFormData] = useState({
         username: "",
         password: ""
@@ -194,8 +198,14 @@ const Login = () =>{
 
 
     const handleShowCart = () => {
+        setControl(1)
         setShowCart(prevShowCart => !prevShowCart); 
     };
+
+    const handleShowOrders = () =>{
+        setControl(2)
+        setShowOrders(prevOrders => !prevOrders);
+    }
 
 
     return (
@@ -272,11 +282,19 @@ const Login = () =>{
                                         user={loggedInUser} 
                                     />
                                     <button className="show-cart" onClick={handleShowCart}>
-                                        <img src={cart} alt="Show Cart" />
+                                        <img className="cart-image" src={cart} alt="Show Cart" />
                                      </button>
-                                    {showCart && (
+                                    {showCart && control === 1 && (
                                         <div className="cart">
                                             <Cart loggedInUser={loggedInUser} />
+                                        </div>
+                                    )}
+                                    <button className="show-orders" onClick={handleShowOrders}>
+                                        <img className="cart-image" src={orders} alt="Order" />
+                                     </button>
+                                    {showOrders && control === 2 && (
+                                        <div className="orders">
+                                            <Orders loggedInUser={loggedInUser} />
                                         </div>
                                     )}
                                 </>
@@ -293,12 +311,22 @@ const Login = () =>{
                                     <DisplayDetails
                                         user={loggedInUser} 
                                     />
+
                                      <button className="show-cart" onClick={handleShowCart}>
-                                        <img src={cart} alt="Show Cart" />
+                                        <img className="cart-image" src={cart} alt="Show Cart" />
                                      </button>
-                                    {showCart && (
+                                    {showCart && control === 1 && (
                                         <div className="cart">
                                             <Cart loggedInUser={loggedInUser} />
+                                        </div>
+                                    )}
+
+                                    <button className="show-orders" onClick={handleShowOrders}>
+                                        <img className="cart-image" src={orders} alt="Order" />
+                                     </button>
+                                    {showOrders && control === 2 && (
+                                        <div className="orders">
+                                            <Orders loggedInUser={loggedInUser} />
                                         </div>
                                     )}
                                 </>
