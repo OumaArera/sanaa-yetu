@@ -1,7 +1,3 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
-
 #login{
     margin-left: 10px;
     top: 120px;
@@ -37,10 +33,14 @@
     color: #007bff;
     font-size: 1.1vw;
 }
+.logout{
+    width: 25px;
+    height: 25px;
+}
+
 
 .logout-button {
     padding: 0.9rem 1.5rem;
-    color: #dc3545;
     border: none;
     cursor: pointer;
     border-radius: 20px;
@@ -50,25 +50,119 @@
     position: absolute;
 }
 
+.logout-button::before {
+    content: "Logout"; 
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    border-radius: 5px;
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease;
+    font-size: 1.2vw;
+    color: #007bff;
+}
+
+.logout-button:hover::before {
+    opacity: 1; 
+}
+
 .show-cart{
     padding: 0.9rem 1.5rem;
     border: none;
     cursor: pointer;
     top: 120px;
-    right: 165px;
+    right: 115px;
     position: absolute;
     border-radius: 20px;
 
 }
+
+.show-cart::before{
+    content: "Cart"; 
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    border-radius: 5px;
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease;
+    font-size: 1.2vw;
+    color: #007bff;
+}
+
+.show-cart:hover::before {
+    opacity: 1; 
+}
+
 
 .show-orders{
     padding: 0.9rem 1.5rem;
     border: none;
     cursor: pointer;
     top: 120px;
-    right: 265px;
+    right: 215px;
     position: absolute;
     border-radius: 20px;
+}
+
+.show-orders::before {
+    content: "Orders"; 
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    border-radius: 5px;
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease;
+    font-size: 1.2vw;
+    color: #007bff;
+}
+
+.show-orders:hover::before {
+    opacity: 1; 
+}
+
+.soko{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    top: 120px;
+    right: 305px;
+    position: absolute;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.2vw;
+}
+
+.shop{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    top: 120px;
+    right: 415px;
+    position: absolute;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.2vw;
+}
+
+.report{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    top: 120px;
+    right: 525px;
+    position: absolute;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.2vw;
 }
 
 .toggle-password{

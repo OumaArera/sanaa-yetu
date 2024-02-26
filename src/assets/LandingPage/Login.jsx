@@ -4,11 +4,14 @@ import "./Login.css";
 import DisplayDetails from "../Buyer/DisplayDetails";
 import Cart from "../Buyer/Cart";
 import Orders from "../Buyer/Orders";
+import Shop from "../Seller/Shop";
+import Report from "../Seller/Report";
 
 import closedEyeIcon from "../Images/closed.svg";
 import openEyeIcon from "../Images/open.svg";
 import cart from "../Images/cart.svg";
 import orders from "../Images/bag.svg"
+import logout from "../Images/logout.svg"
 
 
 const url = "http://localhost:3000/users";
@@ -23,15 +26,11 @@ const Login = () =>{
     const [loginError, setLoginError] = useState("");
     const [userType, setUserType] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [showCart, setShowCart] = useState(false);
-    const [showOrders, setShowOrders] = useState(false);
-    const [control, setControl] = useState(1)
+    const [controlPage, setControlPage] = useState(1)
     const [formData, setFormData] = useState({
         username: "",
         password: ""
     });
-
-    // const userId = loggedInUser.id;
 
     const fetchData = async () =>{
         try {
@@ -196,15 +195,26 @@ const Login = () =>{
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
-
     const handleShowCart = () => {
-        setControl(1)
-        setShowCart(prevShowCart => !prevShowCart); 
+        setControlPage(5)
     };
 
     const handleShowOrders = () =>{
-        setControl(2)
-        setShowOrders(prevOrders => !prevOrders);
+        setControlPage(4)
+    }
+
+    const handleShowMarket = () =>{
+        setControlPage(1)
+    }
+
+    const handleShop = () =>{
+        setControlPage(2)
+        
+    }
+
+    const handleReport = () =>{
+        setControlPage(3)
+        
     }
 
 
@@ -231,7 +241,7 @@ const Login = () =>{
                             className="login"
                             name="password"
                             value={formData.password}
-                            type={showPassword ? "text" : "password"} // Toggle input type based on showPassword state
+                            type={showPassword ? "text" : "password"}
                             placeholder="Enter password"
                             onChange={handleChange}
                         />
@@ -262,7 +272,7 @@ const Login = () =>{
                                         onClick={handleLogout} 
                                         className="logout-button"
                                     >
-                                        Sign out
+                                        <img className="logout" src={logout} alt="Logout" />
                                     </button>
                                     <DisplayDetails 
                                         user={loggedInUser}
@@ -276,15 +286,15 @@ const Login = () =>{
                                         onClick={handleLogout} 
                                         className="logout-button"
                                     >
-                                        Sign out
+                                        <img className="logout" src={logout} alt="Logout" />
                                     </button>
-                                    <DisplayDetails 
-                                        user={loggedInUser} 
-                                    />
+                                        <DisplayDetails 
+                                            user={loggedInUser} 
+                                        />
                                     <button className="show-cart" onClick={handleShowCart}>
                                         <img className="cart-image" src={cart} alt="Show Cart" />
                                      </button>
-                                    {showCart && control === 1 && (
+                                        {controlPage === 5 && (
                                         <div className="cart">
                                             <Cart loggedInUser={loggedInUser} />
                                         </div>
@@ -292,7 +302,7 @@ const Login = () =>{
                                     <button className="show-orders" onClick={handleShowOrders}>
                                         <img className="cart-image" src={orders} alt="Order" />
                                      </button>
-                                    {showOrders && control === 2 && (
+                                    {controlPage === 4 && (
                                         <div className="orders">
                                             <Orders loggedInUser={loggedInUser} />
                                         </div>
@@ -306,16 +316,29 @@ const Login = () =>{
                                         onClick={handleLogout} 
                                         className="logout-button"
                                     >
-                                        Sign out
+                                        <img className="logout" src={logout} alt="Logout" />
                                     </button>
-                                    <DisplayDetails
-                                        user={loggedInUser} 
-                                    />
+                                    <button onClick={handleReport} className="report">Report</button>
+                                    {controlPage === 3 && (
+                                        <Report loggedInUser={loggedInUser} />
+                                    )}
+                                    <button className="shop" onClick={handleShop}>Shop</button>
+                                    {controlPage ===2 && (
+                                        <Shop loggedInUser={loggedInUser} />
+                                    )}
+                                    <button className="soko" onClick={handleShowMarket}>Soko</button>
+                                    {controlPage ===1 && (
+                                        <div>
+                                            <DisplayDetails user={loggedInUser} />
+                                        </div>
+                                    )}
+                                    
+                                    
 
                                      <button className="show-cart" onClick={handleShowCart}>
                                         <img className="cart-image" src={cart} alt="Show Cart" />
                                      </button>
-                                    {showCart && control === 1 && (
+                                    {controlPage === 5 && (
                                         <div className="cart">
                                             <Cart loggedInUser={loggedInUser} />
                                         </div>
@@ -324,7 +347,7 @@ const Login = () =>{
                                     <button className="show-orders" onClick={handleShowOrders}>
                                         <img className="cart-image" src={orders} alt="Order" />
                                      </button>
-                                    {showOrders && control === 2 && (
+                                    {controlPage === 4 && (
                                         <div className="orders">
                                             <Orders loggedInUser={loggedInUser} />
                                         </div>
