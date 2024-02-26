@@ -300,7 +300,7 @@ const Cart = ({ loggedInUser }) => {
                         body: JSON.stringify({quantity: updatedItemQuantity})
                     })
                     if (quantityToUpdate.ok){
-                        // alert("Quantity updaed!")
+                        alert("Quantity updaed!")
                         const updateTransactionToSeller = await fetch(`${userUrl}/${updateSeller.id}`,{
                             method: "PATCH",
                             headers: {
@@ -310,7 +310,7 @@ const Cart = ({ loggedInUser }) => {
                             body: JSON.stringify(updateTransaction)
                         })
                         if (updateTransactionToSeller.ok){
-                            // alert("That was quick!")
+                            alert("That was quick!")
                         }else{
                             // alert("Ouch!")
                         }
@@ -324,7 +324,7 @@ const Cart = ({ loggedInUser }) => {
                             body: JSON.stringify(itemToBuy)
                         })
                         if (postTransaction.ok){
-                            // alert("Sales updated!")
+                            alert("Sales updated!")
                             
                         }else{
                             // alert("Back at it!")
@@ -340,7 +340,7 @@ const Cart = ({ loggedInUser }) => {
                         if (updateItemInPastOrders.ok){
                             // handleDeleteItem(item)
                             setProcessingTransaction(2)
-                            // alert("You're crazy!")
+                            alert("You're crazy!")
                             
                             
                         }else{

@@ -147,7 +147,7 @@ const DisplayDetails = ({ user }) => {
 
     
     return (
-        <div >
+        <div className="display-card" >
             <input
                 type="text"
                 className="search-bar"

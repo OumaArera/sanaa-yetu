@@ -17,11 +17,13 @@
     border: 1px solid #ccc;
     border-radius: 15px;
     width: 750px;
-    /* height: 500px; */
     font-size: 1.1vw;
-    /* /* top: 200px; */
-    /* left: 520px; */
-    /* position: absolute; */
+
+}
+
+.display-card{
+    top: 100px;
+    position: absolute;
 }
 
 #add-to-cart{
