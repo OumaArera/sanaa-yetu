@@ -1,112 +1,431 @@
 {
-    "seller": [
+  "merchandise": [
+    {
+      "id": 1,
+      "firstName": "Ouma",
+      "lastName": "Arera",
+      "username": "oumaarera@sanaayetu.com",
+      "type": "seller",
+      "status": "active",
+      "shopName": "Rambungfee Juakali",
+      "location": "Juja",
+      "class": "Juakali",
+      "category": "furniture",
+      "sales": [],
+      "images": [
+        "https://rb.gy/9rgw6r",
+        "https://rb.gy/9rgw6r",
+        "https://rb.gy/9rgw6r"
+      ],
+      "name": "Chair",
+      "price": 1500,
+      "quantity": 10,
+      "color": "black",
+      "size": "one seater",
+      "weight": "3kg",
+      "transport": 200,
+      "deliverytime": 3,
+      "reviews": [
         {
-            "id": 1,
-            "firstName": "Ouma",
-            "lastName": "Arera",
-            "username": "oumaarera@sanaayetu.com",
-            "type": "seller",
-            "status": "active",
-            "shopName": "Rambungfee Juakali",
-            "location": "Juja",
-            "class": "Juakali",
-            "sales": [
-                {
-                    "id": 1,
-                    "buyer": "monicamwangi@gmail.com",
-                    "item": "chair",
-                    "date": "2024-02-19 0000",
-                    "amount": 30000,
-                    "orderNo": "XW45SWR"
-                }
-            ],
-            
-            "merchandise": [
-                {
-                    "id": 1,
-                    "name": "Chair",
-                    "quantity": 10,
-                    "color": "black",
-                    "size": "one seater",
-                    "weight": "3kg",
-                    "price": 1500,
-                    "transport": 200,
-                    "deliverytime": 3,
-                    "category": "furniture",
-                    "shopName": "Rambungfee Juakali",
-                    "location": "Juja",
-                    "reviews": [
-                        {
-                            "id": 1,
-                            "sender": "monicamwangi@gmail.com",
-                            "date":"2024-02-19 0000",
-                            "status": "read",
-                            "review": ["dfghjsdffghjsdghjksdghjd", "dfgshjdfghsjdfghjskdfghjksdg"],
-                            "reply": ["sdfghjdffghsjkdfghjkdf", "xfghdvcvbnxc werrtyuiweghj"]
-                        }
-                    ],
-                    "messages": [
-                        {
-                            "id": 1,
-                            "sender": "monicamwangi@gmail.com",
-                            "date":"2024-02-19 0000",
-                            "status": "read",
-                            "review": ["dfghjsdffghjsdghjksdghjd", "dfgshjdfghsjdfghjskdfghjksdg"],
-                            "reply": ["sdfghjdffghsjkdfghjkdf", "xfghdvcvbnxc werrtyuiweghj"]
-                        }
-                    ],
-                    "images": []
+          "id": "",
+          "reviewer": "",
+          "review": "",
+          "ratingOne": 0,
+          "ratingTwo": 0,
+          "ratingThree": 0,
+          "ratingFour": 0,
+          "ratingFive": 0
 
-                }
-            ]
         }
-    ],
-    "users": [
+      ]
+    },
+    {
+      "id": 2,
+      "firstName": "Ouma",
+      "lastName": "Arera",
+      "username": "oumaarera@sanaayetu.com",
+      "type": "seller",
+      "status": "active",
+      "shopName": "Rambungfee Juakali",
+      "location": "Juja",
+      "class": "Juakali",
+      "category": "furniture",
+      "sales": [],
+      "images": [
+        "https://rb.gy/9rgw6r",
+        "https://rb.gy/9rgw6r",
+        "https://rb.gy/9rgw6r"
+      ],
+      "name": "Pot",
+      "price": 1500,
+      "quantity": 10,
+      "color": "black",
+      "size": "one seater",
+      "weight": "3kg",
+      "transport": 200,
+      "deliverytime": 3,
+      "reviews": []
+    },
+    {
+      "id": 3,
+      "firstName": "Ouma",
+      "lastName": "Arera",
+      "username": "oumaarera@sanaayetu.com",
+      "type": "seller",
+      "status": "active",
+      "shopName": "Rambungfee Juakali",
+      "location": "Juja",
+      "class": "Juakali",
+      "category": "furniture",
+      "sales": [],
+      "images": [
+        "https://rb.gy/9rgw6r",
+        "https://rb.gy/9rgw6r",
+        "https://rb.gy/9rgw6r"
+      ],
+      "name": "Table",
+      "price": 1500,
+      "quantity": 10,
+      "color": "black",
+      "size": "one seater",
+      "weight": "3kg",
+      "transport": 200,
+      "deliverytime": 3,
+      "reviews": []
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Nyagoro",
+      "lastName": "Minwa",
+      "status": "active",
+      "username": "nyagoro@gmail.com",
+      "password": "Nyagoro123",
+      "messages": [],
+      "incart": [],
+      "pastorders": [],
+      "type": "buyer",
+      "otherdetails": []
+    },
+    {
+      "id": 2,
+      "firstName": "Monica",
+      "lastName": "Mwangi",
+      "status": "active",
+      "username": "monicamwangi@sanaayetu.com",
+      "password": "Monica@2024",
+      "messages": [],
+      "incart": [],
+      "pastorders": [],
+      "type": "admin",
+      "otherdetails": []
+    },
+    {
+      "id": "9504af05-6eba-4906-8ce9-79b30ae030ec",
+      "firstName": "Ouma",
+      "lastName": "Arera",
+      "username": "oumaarera@sanaayetu.com",
+      "password": "Minwa@Nyagoro2024",
+      "type": "seller",
+      "incart": [],
+      "pastorders": [],
+      "otherdetails": [],
+      "status": "active",
+      "messages": [
         {
-            "id": 1,
-            "firstName": "Nyagoro",
-            "lastName": "Minwa",
-            "username": "nyagoro@gmail.com",
-            "password": "Nyagoro123",
-            "type":"buyer"
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "sdfgsdfgh",
+          "timeStamp": "2024-02-22T10:31:01.194Z"
         },
         {
-            "id": 2,
-            "firstName": "Ouma",
-            "lastName": "Arera",
-            "username": "oumaarera@sanaayetu.com",
-            "password": "Minwa@Nyagoro2024",
-            "type": "seller"
+          "id": "2940156e-211f-4cff-9a74-5cc8b0148fe7",
+          "sender": "wanjerigrammarly@gmail.com",
+          "text": "sdfgsdfgh",
+          "timeStamp": "2024-02-22T10:38:18.971Z"
         },
         {
-            "id": 3,
-            "firstName": "Monica",
-            "lastName": "Mwangi",
-            "username": "monicamwangi@sanaayetu.com",
-            "password": "Monica@2024",
-            "type": "admin"
-        }
-    ],
-    "sales":[
+          "id": "2940156e-211f-4cff-9a74-5cc8b0148fe7",
+          "sender": "wanjerigrammarly@gmail.com",
+          "text": "sdfgsdfgh",
+          "timeStamp": "2024-02-22T10:51:10.974Z"
+        },
         {
-            "id": 1,
-            "seller": "Rambungfee Juakali",
-            "buyer": "Nyagoro Minwa",
-            "orderNo": "SDGHJSDF5647863",
-            "date": "2024/02/19",
-            "cost": 3000,
-            "deliveryTime": 3,
-            "itemName": "kiondo",
-            "itemTransport": 200
-        }
-    ],
-    "apllicationReviews": [
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "fghjkghjk",
+          "timeStamp": "2024-02-22T11:12:50.562Z"
+        },
         {
-            "id": 1,
-            "sender": "monicamwangi@gmail.com",
-            "date":"2024-02-19 0000",
-            "review": ["dfghjtyuifg"],
-            "reply": ["sdfghjdffghsjkdfghjkdf"]
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "Hi my name is Ouma and I wanted some customized item form my birthday. My email is sent with this message but also my number.",
+          "timeStamp": "2024-02-22T11:23:19.131Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "Hi",
+          "timeStamp": "2024-02-22T11:46:52.058Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "sdftgyh",
+          "timeStamp": "2024-02-22T11:47:20.471Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "asedrfty",
+          "timeStamp": "2024-02-22T11:47:43.696Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "Hi",
+          "timeStamp": "2024-02-22T11:52:03.646Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "asdfgujhkadrftgujhasdrftgyasdrterdtfghjkedrftgyhjedrtfgyuwertyedrtyuertyuwerty",
+          "timeStamp": "2024-02-22T12:02:22.908Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "asdrtfgy",
+          "timeStamp": "2024-02-22T12:03:29.639Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "sdtrfgyhujk",
+          "timeStamp": "2024-02-22T12:04:22.222Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "wedfrgtyhjuertyuj",
+          "timeStamp": "2024-02-22T12:05:13.707Z"
         }
-    ]
+      ]
+    },
+    {
+      "id": "06060c60-cdf8-4011-91e3-e647c68f1a1e",
+      "firstName": "Ouma",
+      "lastName": "Arera",
+      "username": "mutuluerick@gmail.com",
+      "password": "Mutulu$123",
+      "type": "buyer",
+      "incart": [
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "timeStamp": "2024-02-22T10:22:09.408Z",
+          "username": "mutuluerick@gmail.com",
+          "seller": "oumaarera@sanaayetu.com",
+          "images": [
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r"
+          ],
+          "name": "Chair",
+          "price": 1500,
+          "shopName": "Rambungfee Juakali",
+          "quantity": 10,
+          "color": "black",
+          "size": "one seater",
+          "weight": "3kg",
+          "transport": 200,
+          "deliverytime": 3,
+          "class": "Juakali",
+          "category": "furniture",
+          "location": "Juja",
+          "messages": []
+        },
+        {
+          "id": "1928e892-1659-4c83-99fb-9cdd7841b5a2",
+          "timeStamp": "2024-02-22T11:12:28.172Z",
+          "username": "mutuluerick@gmail.com",
+          "seller": "oumaarera@sanaayetu.com",
+          "images": [
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r"
+          ],
+          "name": "Pot",
+          "price": 1500,
+          "shopName": "Rambungfee Juakali",
+          "quantity": 10,
+          "color": "black",
+          "size": "one seater",
+          "weight": "3kg",
+          "transport": 200,
+          "deliverytime": 3,
+          "class": "Juakali",
+          "category": "furniture",
+          "location": "Juja",
+          "messages": []
+        },
+        {
+          "id": "38f933cb-ee3c-4a2e-83a3-da010b3f2cb8",
+          "timeStamp": "2024-02-23T07:12:45.641Z",
+          "username": "mutuluerick@gmail.com",
+          "seller": "oumaarera@sanaayetu.com",
+          "images": [
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r"
+          ],
+          "name": "Table",
+          "price": 1500,
+          "shopName": "Rambungfee Juakali",
+          "quantity": 10,
+          "color": "black",
+          "size": "one seater",
+          "weight": "3kg",
+          "transport": 200,
+          "deliverytime": 3,
+          "class": "Juakali",
+          "category": "furniture",
+          "location": "Juja",
+          "messages": []
+        }
+      ],
+      "pastorders": [],
+      "messages": [
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "sdfgsdfgh",
+          "timeStamp": "2024-02-22T10:31:01.194Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "fghjkghjk",
+          "timeStamp": "2024-02-22T11:12:50.562Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "Hi my name is Ouma and I wanted some customized item form my birthday. My email is sent with this message but also my number.",
+          "timeStamp": "2024-02-22T11:23:19.131Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "Hi",
+          "timeStamp": "2024-02-22T11:46:52.058Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "sdftgyh",
+          "timeStamp": "2024-02-22T11:47:20.471Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "asedrfty",
+          "timeStamp": "2024-02-22T11:47:43.696Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "Hi",
+          "timeStamp": "2024-02-22T11:52:03.646Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "asdfgujhkadrftgujhasdrftgyasdrterdtfghjkedrftgyhjedrtfgyuwertyedrtyuertyuwerty",
+          "timeStamp": "2024-02-22T12:02:22.908Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "asdrtfgy",
+          "timeStamp": "2024-02-22T12:03:29.639Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "sdtrfgyhujk",
+          "timeStamp": "2024-02-22T12:04:22.222Z"
+        },
+        {
+          "id": "9eaa10ad-dbf3-4e9e-9a00-b0eeabe0b949",
+          "sender": "mutuluerick@gmail.com",
+          "text": "wedfrgtyhjuertyuj",
+          "timeStamp": "2024-02-22T12:05:13.707Z"
+        }
+      ],
+      "otherdetails": {
+        "shopName": "",
+        "location": "",
+        "class": "",
+        "category": ""
+      }
+    },
+    {
+      "id": "b153403a-78b4-4634-9ed0-999fa4283923",
+      "firstName": "Ouma",
+      "lastName": "Arera",
+      "username": "wanjerigrammarly@gmail.com",
+      "password": "Wanjeri!123",
+      "type": "seller",
+      "incart": [
+        {
+          "id": "2940156e-211f-4cff-9a74-5cc8b0148fe7",
+          "timeStamp": "2024-02-22T10:38:13.746Z",
+          "username": "wanjerigrammarly@gmail.com",
+          "seller": "oumaarera@sanaayetu.com",
+          "images": [
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r",
+            "https://rb.gy/9rgw6r"
+          ],
+          "name": "Chair",
+          "price": 1500,
+          "shopName": "Rambungfee Juakali",
+          "quantity": 10,
+          "color": "black",
+          "size": "one seater",
+          "weight": "3kg",
+          "transport": 200,
+          "deliverytime": 3,
+          "class": "Juakali",
+          "category": "furniture",
+          "location": "Juja",
+          "messages": []
+        }
+      ],
+      "pastorders": [],
+      "otherdetails": {
+        "shopName": "Top Notch",
+        "location": "Mombasa County",
+        "class": "Woodwork",
+        "category": "Test"
+      },
+      "messages": [
+        {
+          "id": "2940156e-211f-4cff-9a74-5cc8b0148fe7",
+          "sender": "wanjerigrammarly@gmail.com",
+          "text": "sdfgsdfgh",
+          "timeStamp": "2024-02-22T10:38:18.971Z"
+        },
+        {
+          "id": "2940156e-211f-4cff-9a74-5cc8b0148fe7",
+          "sender": "wanjerigrammarly@gmail.com",
+          "text": "sdfgsdfgh",
+          "timeStamp": "2024-02-22T10:51:10.974Z"
+        }
+      ]
+    }
+  ],
+  "sales": [],
+  "apllicationReviews": []
 }
