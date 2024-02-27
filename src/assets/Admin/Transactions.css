@@ -1,0 +1,44 @@
+#transactions-card{
+    top: 220px;
+    left: 50px;
+    position: absolute;
+}
+
+.transactions{
+    border: 1px solid black;
+    height: 100px;
+}
+
+.transactions-action{
+    border: 1px solid black;
+    width: 80px;
+
+}
+
+.item-image{
+    height: 100px;
+    width: 100px;
+}
+
+.block-btn{
+    margin-top: -25px;
+    margin-left: 15px;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    background-color: none;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+}
+
+.image-btn{
+    width: 40px;
+    height: 40px;
+    
+}
+
+.error{
+    color: #dc3545;
+    font-size: 1.2vw;
+}
