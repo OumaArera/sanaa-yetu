@@ -22,6 +22,7 @@
 }
 
 .display-card{
+    left: -200px;
     top: 100px;
     position: absolute;
 }

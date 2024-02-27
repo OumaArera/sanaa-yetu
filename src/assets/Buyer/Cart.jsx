@@ -244,6 +244,7 @@ const Cart = ({ loggedInUser }) => {
             color: item.color,
             weight: item.weight,
             shopName: item.shopName,
+            paymentStatus: "unpaid",
             size: item.size,
             class: item.class,
             category: item.category,
@@ -261,10 +262,6 @@ const Cart = ({ loggedInUser }) => {
         };
         setItemToBuy(detailsToSave)
         setConfirm(true)
-        // const confirmation = confirm("Do you want to proceed with transaction?")
-        // if (confirmation){
-            
-        // }
         
     }
 
