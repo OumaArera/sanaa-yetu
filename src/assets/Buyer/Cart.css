@@ -21,7 +21,7 @@
 .message-card{
     width: 500px;
     font-size: 1.4vw;
-    background-color: azure;
+    background-color: rgb(250, 250, 250);
     margin-top: 10px;
     border-radius: 20px;
 }
