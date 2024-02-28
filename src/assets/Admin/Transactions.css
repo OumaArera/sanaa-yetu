@@ -1,0 +1,55 @@
+#transactions-card{
+    top: 220px;
+    left: 150px;
+    position: absolute;
+}
+
+.transactions{
+    border: 1px solid black;
+    height: 120px;
+    position: relative;
+    
+}
+
+
+.item-image{
+    height: 100px;
+    width: 100px;
+}
+
+.block-btn{
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    background-color: none;
+    align-items: center;
+    align-content: center;
+}
+
+.image-btn{
+    width: 40px;
+    height: 40px;
+    
+}
+
+.error{
+    color: #dc3545;
+    font-size: 1.2vw;
+}
+
+#table{
+    top: 100px;
+    width: 1250px;
+    position: absolute;
+}
+
+.search-details{
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 750px;
+    font-size: 1.1vw;
+    margin-bottom: 120px;
+    position: absolute;
+}

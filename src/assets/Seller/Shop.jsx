@@ -121,7 +121,20 @@ const Shop = ({ loggedInUser }) =>{
             })
             if (response.ok){
                 fetchMerchandise();
-                setItemsToAdd("")
+                setItemsToAdd({
+                    
+                    firstImage: "",
+                    secondImage: "",
+                    thirdImage: "",
+                    name: "",
+                    price: "",
+                    quantity: "",
+                    color: "",
+                    size: "",
+                    weight: "",
+                    transport: "",
+                    deliverytime: ""
+                })
                 alert("That went straight!")
             }
 

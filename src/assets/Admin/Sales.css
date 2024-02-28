@@ -1,0 +1,41 @@
+#sales-card{
+    top: 220px;
+    left: 10px;
+    position: absolute;
+}
+
+.sales-table{
+    border: 1px solid black;
+    margin-top: 80px;
+}
+
+.sales{
+    border: 1px solid black;
+    /* height: 190px; */
+}
+
+.sales-action{
+    border: 1px solid black;
+    width: 80px;
+}
+
+.block-btn{
+    color: #007bff;
+    background: none;
+}
+
+#date-item{
+    width: 100px;
+}
+
+.search{
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 750px;
+    font-size: 1.1vw;
+    margin-bottom: 20px;
+    position: absolute;
+
+}

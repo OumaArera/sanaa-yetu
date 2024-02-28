@@ -99,6 +99,7 @@ const Cart = ({ loggedInUser }) => {
             ...prevTextMessages,
             [itemId]: { text: value }
         }));
+        console.log(textMessages);
     };
 
     const handleSendMessage = async item => {
@@ -133,7 +134,7 @@ const Cart = ({ loggedInUser }) => {
             const message = {
                 id: item.id,
                 sender: loggedInUser.username,
-                text: textMessages[item.id].text, 
+                text: textMessages.item.id.text, 
                 timeStamp: new Date().toISOString() 
             };
     
@@ -149,7 +150,7 @@ const Cart = ({ loggedInUser }) => {
                 messages: [...userLoggedIn.messages, message]
             }
             // Patch the updated user data to the server
-            const response = await fetch(`${userUrl}/${specificUser.id}`, {
+            await fetch(`${userUrl}/${specificUser.id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -158,21 +159,19 @@ const Cart = ({ loggedInUser }) => {
                 body: JSON.stringify(updatedUser)
             });
     
-            if (response.ok) {
-                const saveSentMessage = await fetch(`${userUrl}/${loggedInUser.id}`, {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                    },
-                    body: JSON.stringify(savedMessage)
-                });
-                if(saveSentMessage.ok){
-                    setTextMessages("")
-                }
-            } else {
-                setSellerError("Failed to send message. Please try again later.");
+            
+            const saveSentMessage = await fetch(`${userUrl}/${loggedInUser.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify(savedMessage)
+            });
+            if(saveSentMessage.ok){
+                setTextMessages("")
             }
+            
         } catch (err) {
             console.error(err);
             setSellerError("Failed to send message. Please try again later.");
@@ -219,10 +218,15 @@ const Cart = ({ loggedInUser }) => {
 
     const handlePhoneNummber = event =>{
         const {name, value} = event.target;
-        setPhoneNumber(prevValue =>({
-            ...prevValue,
-            [name]: value,
-        }))
+        if (/^\d{10,13}$/.test(value)) {
+            setPhoneNumberError(""); // Clear any previous error message
+            setPhoneNumber(prevValue => ({
+                ...prevValue,
+                [name]: value
+            }));
+        } else {
+            setPhoneNumberError("Please enter a valid phone number (10 to 13 digits)");
+        }
     }
 
     const processTransaction = item =>{
@@ -244,6 +248,7 @@ const Cart = ({ loggedInUser }) => {
             color: item.color,
             weight: item.weight,
             shopName: item.shopName,
+            paymentStatus: "unpaid",
             size: item.size,
             class: item.class,
             category: item.category,
@@ -261,14 +266,30 @@ const Cart = ({ loggedInUser }) => {
         };
         setItemToBuy(detailsToSave)
         setConfirm(true)
-        // const confirmation = confirm("Do you want to proceed with transaction?")
-        // if (confirmation){
-            
-        // }
         
     }
 
-    const confirmPayment = ()  =>{
+    const confirmPayment = async ()  =>{
+
+        const updatedItemQuantity = parseInt(itemToBuy.quantity) - 1;
+
+        try{
+            await fetch(`${sellerUrl}/${itemToBuy.itemId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify({quantity: updatedItemQuantity})
+            })
+            setPhoneNumber("");
+        }catch(err){
+            console.log(err)
+            setTransactionError("There was an error posting the transaction")
+        }
+    }
+
+    const handleUpdateTransactioToSeller = async () =>{
 
         const updateSeller = Array.isArray(users) && users.find(user => user.username === itemToBuy.seller);
 
@@ -277,101 +298,67 @@ const Cart = ({ loggedInUser }) => {
             ...updateSeller,
             sales: [...updateSeller.sales, itemToBuy]
         }
+        try{
+            await fetch(`${userUrl}/${updateSeller.id}`,{
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify(updateTransaction)
+            })
+
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    const handePostTransaction = async () =>{
         
+        try{
+
+            await fetch(salesUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify(itemToBuy)
+            })
+
+        }catch(err){
+            console.log(err)
+        }
+        
+    }
+
+    const handleUpdateItem = async () =>{
+
         const pastOrders = {
             ...loggedInUser,
             pastorders: [...loggedInUser.pastorders, itemToBuy],
         }
 
-        // const quantityToUpdate = parseInt(processingTransaction.quantity) - 1;
-        const updatedItemQuantity = parseInt(itemToBuy.quantity) - 1;
-        const number = phoneNumber.phone
-
-        if (number.length >= 10){
-
-            const updateQuantity = async ()=>{
-                try{
-                    const quantityToUpdate = await fetch(`${sellerUrl}/${itemToBuy.itemId}`, {
-                        method: "PATCH",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Accept: "application/json"
-                        },
-                        body: JSON.stringify({quantity: updatedItemQuantity})
-                    })
-                    if (quantityToUpdate.ok){
-                        alert("Quantity updaed!")
-                        const updateTransactionToSeller = await fetch(`${userUrl}/${updateSeller.id}`,{
-                            method: "PATCH",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Accept: "application/json",
-                            },
-                            body: JSON.stringify(updateTransaction)
-                        })
-                        if (updateTransactionToSeller.ok){
-                            alert("That was quick!")
-                        }else{
-                            // alert("Ouch!")
-                        }
-
-                        const postTransaction = await fetch(salesUrl, {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Accept: "application/json"
-                            },
-                            body: JSON.stringify(itemToBuy)
-                        })
-                        if (postTransaction.ok){
-                            alert("Sales updated!")
-                            
-                        }else{
-                            // alert("Back at it!")
-                        }
-                        const updateItemInPastOrders = await fetch(`${userUrl}/${loggedInUser.id}`, {
-                            method: "PATCH",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Accept: "application/json",
-                            },
-                            body: JSON.stringify(pastOrders)
-                        })
-                        if (updateItemInPastOrders.ok){
-                            // handleDeleteItem(item)
-                            setProcessingTransaction(2)
-                            alert("You're crazy!")
-                            
-                            
-                        }else{
-                            // alert("Kidogo tu!")
-                        }
-
-                    }
-
-                    // alert("Ouch!")
-                }catch(err){
-                    // alert("Ouch! Ouch!")
-                    console.log(err)
-                    setTransactionError("There was an error posting the transaction")
-                }
+        try{
+            const updateItemInPastOrders = await fetch(`${userUrl}/${loggedInUser.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify(pastOrders)
+            })
+            if (updateItemInPastOrders.ok){
+                setProcessingTransaction(2)    
             }
-            updateQuantity()
-
-            // const confirmation = confirm("Proceed with payment?")
-
-        }else{
-            alert("No phone number")
-            setPhoneNumberError("Please enter a valid phone number")
+        }catch(err){
+            console.log(err)
         }
-        
- 
     }
 
     
 
     const handleDeleteItem = async item =>{
-        // alert(`Can delete by the way! ${item.name}`)
         try{
             
             const updatedUser = { ...loggedInUser };
@@ -390,7 +377,6 @@ const Cart = ({ loggedInUser }) => {
 
         }catch(err){
             console.log(err)
-            // alert("Aje sasa?")
         }
 
     }
@@ -537,15 +523,29 @@ const Cart = ({ loggedInUser }) => {
                                 <button
                                 className="proceed"
                                 onClick={() => processTransaction(item)}
+                                disabled={phoneNumberError}
                                 >
                                     Proceed
                                 </button>
                             )
                             }
+                            {transactionError && <p className="error">{transactionError}</p>}
+                            {phoneNumberError && <p className="error">{phoneNumberError}</p>}
                             {confirm &&(
                                 <button onClick={() => {
                                     confirmPayment()
-                                    handleDeleteItem(item)
+                                    setTimeout(() =>{
+                                        handleUpdateTransactioToSeller()
+                                    },500)
+                                    setTimeout(() =>{
+                                        handePostTransaction()
+                                    }, 1000)
+                                    setTimeout(() =>{
+                                        handleUpdateItem()
+                                    }, 1500)
+                                    setTimeout(() =>{
+                                        handleDeleteItem(item)
+                                    }, 2000)
                                     }} className="proceed">Confirm
                                 </button>
                             )}

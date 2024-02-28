@@ -38,6 +38,30 @@
     height: 25px;
 }
 
+#soko-yetu{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 1.1vw;
+    top: 120px;
+    right: 120px;
+    position: absolute;
+    color: #007bff;
+}
+
+#sales-report{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 1.1vw;
+    top: 120px;
+    right: 220px;
+    position: absolute;
+    color: #007bff; 
+}
+
 
 .logout-button {
     padding: 0.9rem 1.5rem;

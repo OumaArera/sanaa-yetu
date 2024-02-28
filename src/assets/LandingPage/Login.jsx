@@ -6,6 +6,8 @@ import Cart from "../Buyer/Cart";
 import Orders from "../Buyer/Orders";
 import Shop from "../Seller/Shop";
 import Report from "../Seller/Report";
+import Transactions from "../Admin/Transactions";
+import Sales from "../Admin/Sales";
 
 import closedEyeIcon from "../Images/closed.svg";
 import openEyeIcon from "../Images/open.svg";
@@ -26,7 +28,11 @@ const Login = () =>{
     const [loginError, setLoginError] = useState("");
     const [userType, setUserType] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [controlPage, setControlPage] = useState(1)
+    const [controlPage, setControlPage] = useState(1);
+    const [showItems, setShowItems] = useState(false);
+    const [showCart, setShowCart] = useState(false);
+    const [showOrders, setShowOrders] = useState(false);
+    const [showSales, setShowSales] = useState(false);
     const [formData, setFormData] = useState({
         username: "",
         password: ""
@@ -151,7 +157,7 @@ const Login = () =>{
         // Set the logout timer to log out the user after 2 minutes of inactivity
         logoutTimer = setTimeout(() => {
             handleLogout();
-        }, 120000); 
+        }, 480000); 
     };
 
 
@@ -217,6 +223,26 @@ const Login = () =>{
         
     }
 
+    const handleShowBuyerCart = () =>{
+        setShowCart(prevState => !prevState);
+        setShowOrders(false);
+    }
+
+    const handleShowBuyerOrders = () =>{
+        setShowCart(false);
+        setShowOrders(prevState => !prevState);
+    }
+
+    const handleShowSokoToAdmin = () =>{
+        setShowItems(prevState => !prevState);
+        setShowSales(false);
+    }
+
+    const handleShowSales = () =>{
+        setShowSales(prevState => !prevState);
+        setShowItems(false);
+        // alert("Hi!")
+    }
 
     return (
         <div>
@@ -274,9 +300,19 @@ const Login = () =>{
                                     >
                                         <img className="logout" src={logout} alt="Logout" />
                                     </button>
-                                    <DisplayDetails 
-                                        user={loggedInUser}
-                                    />
+                                    <button id="sales-report" onClick={handleShowSales}>Sales</button>
+                                    {showSales && (
+                                        <div>
+                                            <Sales />
+                                        </div>
+                                    )}
+                                    <button id="soko-yetu" onClick={handleShowSokoToAdmin}>Soko</button>
+                                    {showItems && (
+                                        <div>
+                                            <Transactions />
+                                        </div>
+                                    )}
+                                    
                                 </>
                             )}
                             {userType === "buyer" && (
@@ -291,18 +327,18 @@ const Login = () =>{
                                         <DisplayDetails 
                                             user={loggedInUser} 
                                         />
-                                    <button className="show-cart" onClick={handleShowCart}>
+                                    <button className="show-cart" onClick={handleShowBuyerCart}>
                                         <img className="cart-image" src={cart} alt="Show Cart" />
                                      </button>
-                                        {controlPage === 5 && (
+                                        {showCart && !showOrders && (
                                         <div className="cart">
                                             <Cart loggedInUser={loggedInUser} />
                                         </div>
                                     )}
-                                    <button className="show-orders" onClick={handleShowOrders}>
+                                    <button className="show-orders" onClick={handleShowBuyerOrders}>
                                         <img className="cart-image" src={orders} alt="Order" />
                                      </button>
-                                    {controlPage === 4 && (
+                                    {!showCart && showOrders && (
                                         <div className="orders">
                                             <Orders loggedInUser={loggedInUser} />
                                         </div>
