@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import "./DisplayDetails.css";
 
 const sellersUrl = "http://localhost:3000/merchandise";
@@ -12,14 +12,18 @@ const DisplayDetails = ({ user }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [errorItem, setErrorItem] = useState(null)
     const [addedItemIds, setAddedItemIds] = useState([]);
+    const [addReviews, setAddReviews] = useState("")
+    const [seeReviews, setSeeReviews] = useState({});
     const [error, setError] = useState("")
+
+    const dataToDispaly = merchandise.filter(item => item.status !==  "blocked" && parseInt(item.quantity) >= 1)
 
 
     useEffect(() => {
         setSearchTerm(""); 
       }, []);
 
-      const filteredData = merchandise.filter(item => {
+      const filteredData = dataToDispaly.filter(item => {
         const itemName = item.name ? item.name.toLowerCase() : "";
         const itemClass = item.class ? item.class.toLowerCase() : "";
         const itemCategory = item.category ? item.category.toLowerCase() : "";
@@ -30,26 +34,27 @@ const DisplayDetails = ({ user }) => {
             itemCategory.includes(searchTerm.toLowerCase())
         );
     });
-    
 
     /*
     - Fetches the data in the server and updates state
     */ 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(sellersUrl);
-                if (response.ok) {
-                    const sellersData = await response.json();
-                    setMerchandise(sellersData);
-                } else {
-                    setFetchError("There was an error fetching goods");
-                }
-            } catch (err) {
-                console.log(err);
-                setFetchError("Crazy");
+    
+    const fetchData = async () => {
+        try {
+            const response = await fetch(sellersUrl);
+            if (response.ok) {
+                const sellersData = await response.json();
+                setMerchandise(sellersData);
+            } else {
+                setFetchError("There was an error fetching goods");
             }
-        };
+        } catch (err) {
+            console.log(err);
+            setFetchError("Crazy");
+        }
+    };
+
+    useEffect(() => {
         fetchData();
     }, []);
 
@@ -143,39 +148,114 @@ const DisplayDetails = ({ user }) => {
             setError("There was an error adding your item.");
         }
     };
-    
 
+    const handleAddReview = event =>{
+        const {name, value} = event.target;
+        setAddReviews(prevRev =>({
+            ...prevRev,
+            [name]: value,
+        }))
+    }
+
+    const handleSendReview = async (item) =>{
+        // event.preventDefault();
+        try{
+            const review = {
+                sender: user.username,
+                review: addReviews.review,
+                time: new Date().toString(),
+                id: uuidv4()
+            }
+            const reviews = {
+                ...item,
+                reviews: [...item.reviews, review ]
+            }
+            const response = await fetch(`${sellersUrl}/${item.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify(reviews)
+            })
+            if (response.ok){
+                fetchData();
+                setAddReviews({
+                    review: ""
+                })
+            }
+
+        }catch(err){
+            console.log
+        }
+    }
+
+    const handleSeeReviews = itemId =>{
+        setSeeReviews(prevVisibleReviews => ({
+            ...prevVisibleReviews,
+            [itemId]: !prevVisibleReviews[itemId]
+        }));
+    }
     
     return (
-        <div className="display-card" >
-            <input
-                type="text"
-                className="search-bar"
-                placeholder="Search item by name, category, description"
-                value={searchTerm}
-                onChange={event => setSearchTerm(event.target.value)}
-            />
-            {fetchError && <p id="error">{fetchError}</p>}
-            <div id="search">
-            {filteredData.map(item => (
-                <div className="display" key={item.id}>
-                    {item.images.map((image, index) => (
-                        <img className="images" key={index} src={image} alt={item.name} />
-                    ))}
-                    <div>
-                        <p>{item.name}</p>
-                        <p>Price: {item.price}</p>
-                        <p>
-                            {item.shopName}, {item.location}
-                        </p>
+        <>
+            <div className="display-card" >
+                <input
+                    type="text"
+                    className="search-bar"
+                    placeholder="Search item by name, category, description"
+                    value={searchTerm}
+                    onChange={event => setSearchTerm(event.target.value)}
+                />
+                {fetchError && <p id="error">{fetchError}</p>}
+                <div id="search">
+                {filteredData.map(item => (
+                    <div className="display" key={item.id}>
+                        {item.images.map((image, index) => (
+                            <img className="images" key={index} src={image} alt={item.name} />
+                        ))}
+                        <div>
+                            <p>{item.name}</p>
+                            <p>Price: {item.price}</p>
+                            <p>
+                                {item.shopName}, {item.location}
+                            </p>
+                        </div>
+                        {errorItem && errorItem.id === item.id && <p style={{color: "red"}}>{error}</p>}
+                        {addedItemIds.includes(item.id) && <p style={{color: "green"}}>Added to your cart</p>}
+                        <button className="reviews-btn" onClick={() => handleSeeReviews(item.id)}>Reviews</button>
+                        <br />
+                        {seeReviews[item.id] && (
+                            <div>
+                                <textarea 
+                                    className="reviews"
+                                    type="text" 
+                                    name="review"
+                                    placeholder="Review..."
+                                    value={addReviews.review}
+                                    onChange={handleAddReview}
+                                />
+                                <button className="send-button" onClick={() => handleSendReview(item)}>Send</button>
+                                {item.reviews.map((review, index) =>(
+                                    <div className="review" key={index}>
+                                        <p className="sender">{review.sender}</p>
+                                        <p className="reviewed-review">{review.review}</p>
+                                        <p className="time">{review.time}</p>
+                                    </div>
+                                ))
+                                }
+                            </div>
+                        )
+
+                        }
+                        
+                        <br />
+                        <button onClick={() => handleAddToCart(item)} id="add-to-cart">Add to cart</button>
                     </div>
-                    {errorItem && errorItem.id === item.id && <p style={{color: "red"}}>{error}</p>}
-                    {addedItemIds.includes(item.id) && <p style={{color: "green"}}>Added to your cart</p>}
-                    <button onClick={() => handleAddToCart(item)} id="add-to-cart">Add to cart</button>
+                ))}
                 </div>
-            ))}
             </div>
-        </div>
+        </>
     );
 };
 
