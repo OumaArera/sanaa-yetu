@@ -12,6 +12,7 @@
 }
 
 .header{
-  background-color: aqua;
+  /* background-color: aqua; */
   height: 90px;
+  font-size: 0.6vw;
 }
