@@ -1,0 +1,89 @@
+.search-bar{
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 750px;
+    font-size: 1.1vw;
+    top: 120px;
+    left: 520px;
+    position: absolute;
+}
+
+.reviews{
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 420px;
+    font-size: 1.1vw; 
+}
+
+.send-button{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.1vw;
+    background: none;
+    margin-left: 0;
+    position: relative;
+}
+
+.display{
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 750px;
+    font-size: 1.1vw;
+
+}
+
+.display-card{
+    left: 50px;
+    top: 100px;
+    position: absolute;
+}
+
+#add-to-cart{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.1vw;
+}
+
+.images{
+    width: 250px;
+    height: 250px;
+}
+
+#search{
+    top: 200px;
+    left: 520px;
+    position: absolute;
+}
+
+.sender{
+    font-size: 0.8vw;
+    color: #dc3545;
+}
+
+.time{
+    font-size: 0.7vw;
+    color: #070606;
+}
+
+.reviewed-review{
+    font-size: 1.1vw;
+}
+
+.reviews-btn{
+    font-size: 1.1vw;
+    border: none;
+    background: none;
+    color: #007bff;
+}

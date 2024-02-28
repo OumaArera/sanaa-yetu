@@ -1,14 +1,30 @@
 #first-details{
     margin-left: 10px;
+    top: 250px;
+    left: 700px;
+    position: absolute;
 }
 
 #second-form{
     margin-left: 10px;
+    top: 250px;
+    left: 700px;
+    position: absolute;
+}
+
+#third-form{
+    margin-left: 10px;
+    top: 250px;
+    left: 700px;
+    position: absolute;
 }
 
 #create-account{
     margin-left: 10px;
     font-size: 2vw;
+    top: 120px;
+    left: 700px;
+    position: absolute;
 }
 
 #user-type{
@@ -55,4 +71,17 @@
     border-radius: 20px;
     color: #007bff;
     font-size: 1.1vw;
+}
+
+#success{
+    font-size: 2vw;
+    color: goldenrod;
+}
+
+.toggle-password{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    border: none;
+    border-radius: 10px;
 }

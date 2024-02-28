@@ -1,0 +1,62 @@
+.my-items{
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    left: 650px;
+    top: 220px;
+    position: absolute;
+}
+
+.each-item{
+    margin-bottom: 50px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.images{
+    width: 250px;
+    height: 250px;
+}
+
+.review{
+    width: 500px;
+    font-size: 1.4vw;
+    background-color: rgb(241, 243, 243);
+    margin-top: 10px;
+    border-radius: 20px;
+}
+.my-shop{
+    font-size: 1.2vw;
+    margin-left: 10px;
+}
+
+#add-item{
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    top: 220px;
+    right: 50px;
+    position: absolute;
+}
+
+.add-items{
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 450px;
+    height: 50px;
+    font-size: 1.1vw;
+    margin-top: 10px;
+
+}
+
+#submit-button{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.1vw;
+}
+
+.error{
+    font-size: 1.1vw;
+    color: #dc3545;
+}

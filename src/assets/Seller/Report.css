@@ -1,0 +1,14 @@
+#report-table{
+    top: 220px;
+    left: 400px;
+    position: absolute;
+    
+}
+
+#table{
+    border: 1px solid black;
+}
+
+.transaction{
+    border: 1px solid black;
+}

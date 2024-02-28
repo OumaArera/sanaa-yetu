@@ -1,26 +1,42 @@
 import React, { useState, useEffect } from "react";
 
 import "./Login.css";
+import DisplayDetails from "../Buyer/DisplayDetails";
+import Cart from "../Buyer/Cart";
+import Orders from "../Buyer/Orders";
+import Shop from "../Seller/Shop";
+import Report from "../Seller/Report";
+import Transactions from "../Admin/Transactions";
+import Sales from "../Admin/Sales";
 
 import closedEyeIcon from "../Images/closed.svg";
 import openEyeIcon from "../Images/open.svg";
+import cart from "../Images/cart.svg";
+import orders from "../Images/bag.svg"
+import logout from "../Images/logout.svg"
 
 
 const url = "http://localhost:3000/users";
 
 const Login = () =>{
 
+
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loggedInUser, setLoggedInUser] = useState([]);
     const [loginError, setLoginError] = useState("");
     const [userType, setUserType] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [controlPage, setControlPage] = useState(1);
+    const [showItems, setShowItems] = useState(false);
+    const [showCart, setShowCart] = useState(false);
+    const [showOrders, setShowOrders] = useState(false);
+    const [showSales, setShowSales] = useState(false);
     const [formData, setFormData] = useState({
         username: "",
         password: ""
     });
-
 
     const fetchData = async () =>{
         try {
@@ -37,11 +53,26 @@ const Login = () =>{
             setError("There was an error fetching the data");
             setLoginError("");
         }
-    }
+    };
+
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("loggedInUser");
+        const userType = localStorage.getItem("userType");
+        if (loggedInUser && userType) {
+            setIsLoggedIn(true);
+            setUserType(userType);
+            setLoggedInUser(JSON.parse(loggedInUser)); 
+            // Reset the logout timer upon initial login
+            resetLogoutTimer();
+        }
+        fetchData(); 
+    }, []);
 
     useEffect(() =>{
         fetchData()
     }, [])
+
 
     /*
     - Enable user to enter their username and password
@@ -54,6 +85,8 @@ const Login = () =>{
             [name]: value,
         }))
     }
+
+
     // Confirms user credentials 
     const confirmCredentials = () =>{
 
@@ -70,6 +103,7 @@ const Login = () =>{
             return;
         }
 
+
         /*
         - Confirms that user exists in the database
         - If user exists, checks the password and logs them in if password is correct
@@ -84,8 +118,9 @@ const Login = () =>{
                     user.password === formData.password);
             if (user){
                 setIsLoggedIn(true);
-                localStorage.setItem("loggedInUser", formData.username);
+                setLoggedInUser(user);
                 localStorage.setItem("userType", user.type);
+                localStorage.setItem("loggedInUser", JSON.stringify(user)); // Store user object as string
                 setUserType(user.type);
                 // Reset the logout timer upon successful login
                 resetLogoutTimer();
@@ -97,6 +132,7 @@ const Login = () =>{
         }
     }
 
+
     // Logs user out
     const handleLogout = () => {
         setIsLoggedIn(false);
@@ -104,6 +140,7 @@ const Login = () =>{
         localStorage.removeItem("userType");
         clearTimeout(logoutTimer);
         setLoginError(null)
+        setLoggedInUser('')
         setFormData({
             username: "",
             password: ""
@@ -120,8 +157,9 @@ const Login = () =>{
         // Set the logout timer to log out the user after 2 minutes of inactivity
         logoutTimer = setTimeout(() => {
             handleLogout();
-        }, 120000); 
+        }, 480000); 
     };
+
 
     /*
     - Keeps user logged in even when browser is refreshed. 
@@ -137,6 +175,7 @@ const Login = () =>{
         }
         fetchData();
     }, []);
+
 
     // Event listeners for user actions to reset the logout timer
     useEffect(() => {
@@ -157,10 +196,53 @@ const Login = () =>{
         };
     }, []);
 
+
     const togglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
+    const handleShowCart = () => {
+        setControlPage(5)
+    };
+
+    const handleShowOrders = () =>{
+        setControlPage(4)
+    }
+
+    const handleShowMarket = () =>{
+        setControlPage(1)
+    }
+
+    const handleShop = () =>{
+        setControlPage(2)
+        
+    }
+
+    const handleReport = () =>{
+        setControlPage(3)
+        
+    }
+
+    const handleShowBuyerCart = () =>{
+        setShowCart(prevState => !prevState);
+        setShowOrders(false);
+    }
+
+    const handleShowBuyerOrders = () =>{
+        setShowCart(false);
+        setShowOrders(prevState => !prevState);
+    }
+
+    const handleShowSokoToAdmin = () =>{
+        setShowItems(prevState => !prevState);
+        setShowSales(false);
+    }
+
+    const handleShowSales = () =>{
+        setShowSales(prevState => !prevState);
+        setShowItems(false);
+        // alert("Hi!")
+    }
 
     return (
         <div>
@@ -185,13 +267,13 @@ const Login = () =>{
                             className="login"
                             name="password"
                             value={formData.password}
-                            type={showPassword ? "text" : "password"} // Toggle input type based on showPassword state
+                            type={showPassword ? "text" : "password"}
                             placeholder="Enter password"
                             onChange={handleChange}
                         />
                         <button className="toggle-password" onClick={togglePasswordVisibility}>
                             <img 
-                            className="image"
+                            className="show-image"
                             src={showPassword ? openEyeIcon : closedEyeIcon} 
                             alt={showPassword ? "Hide" : "Show"} />
                         </button>
@@ -206,16 +288,111 @@ const Login = () =>{
                     </button>
                 </div>
             ): (
-                <div>
-                    {userType === "admin" && <p className="my-view">I am admin</p>}
-                    {userType === "buyer" && <p className="my-view">I am a buyer</p>}
-                    {userType === "seller" && <p className="my-view">I am a seller</p>}
-                    <button 
-                        onClick={handleLogout} 
-                        className="logout-button"
-                    >
-                        Sign out
-                    </button>
+                <div id="after-login">
+                    {isLoggedIn && (
+                        <div id="after-login">
+                            {userType === "admin" && (
+                                <>
+                                    <p className="my-view">Welcome, {loggedInUser.firstName} {loggedInUser.lastName}!</p>
+                                    <button 
+                                        onClick={handleLogout} 
+                                        className="logout-button"
+                                    >
+                                        <img className="logout" src={logout} alt="Logout" />
+                                    </button>
+                                    <button id="sales-report" onClick={handleShowSales}>Sales</button>
+                                    {showSales && (
+                                        <div>
+                                            <Sales />
+                                        </div>
+                                    )}
+                                    <button id="soko-yetu" onClick={handleShowSokoToAdmin}>Soko</button>
+                                    {showItems && (
+                                        <div>
+                                            <Transactions />
+                                        </div>
+                                    )}
+                                    
+                                </>
+                            )}
+                            {userType === "buyer" && (
+                                <>
+                                    <p className="my-view">Welcome, {loggedInUser.firstName} {loggedInUser.lastName}!</p>
+                                    <button 
+                                        onClick={handleLogout} 
+                                        className="logout-button"
+                                    >
+                                        <img className="logout" src={logout} alt="Logout" />
+                                    </button>
+                                        <DisplayDetails 
+                                            user={loggedInUser} 
+                                        />
+                                    <button className="show-cart" onClick={handleShowBuyerCart}>
+                                        <img className="cart-image" src={cart} alt="Show Cart" />
+                                     </button>
+                                        {showCart && !showOrders && (
+                                        <div className="cart">
+                                            <Cart loggedInUser={loggedInUser} />
+                                        </div>
+                                    )}
+                                    <button className="show-orders" onClick={handleShowBuyerOrders}>
+                                        <img className="cart-image" src={orders} alt="Order" />
+                                     </button>
+                                    {!showCart && showOrders && (
+                                        <div className="orders">
+                                            <Orders loggedInUser={loggedInUser} />
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                            {userType === "seller" && (
+                                <>
+                                    <p className="my-view">Welcome, {loggedInUser.firstName} {loggedInUser.lastName}!</p>
+                                    <button 
+                                        onClick={handleLogout} 
+                                        className="logout-button"
+                                    >
+                                        <img className="logout" src={logout} alt="Logout" />
+                                    </button>
+                                    <button onClick={handleReport} className="report">Report</button>
+                                    {controlPage === 3 && (
+                                        <Report loggedInUser={loggedInUser} />
+                                    )}
+                                    <button className="shop" onClick={handleShop}>Shop</button>
+                                    {controlPage ===2 && (
+                                        <Shop loggedInUser={loggedInUser} />
+                                    )}
+                                    <button className="soko" onClick={handleShowMarket}>Soko</button>
+                                    {controlPage ===1 && (
+                                        <div>
+                                            <DisplayDetails user={loggedInUser} />
+                                        </div>
+                                    )}
+                                    
+                                    
+
+                                     <button className="show-cart" onClick={handleShowCart}>
+                                        <img className="cart-image" src={cart} alt="Show Cart" />
+                                     </button>
+                                    {controlPage === 5 && (
+                                        <div className="cart">
+                                            <Cart loggedInUser={loggedInUser} />
+                                        </div>
+                                    )}
+
+                                    <button className="show-orders" onClick={handleShowOrders}>
+                                        <img className="cart-image" src={orders} alt="Order" />
+                                     </button>
+                                    {controlPage === 4 && (
+                                        <div className="orders">
+                                            <Orders loggedInUser={loggedInUser} />
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                            
+                        </div>
+                    )}
                 </div>
             )
             }
@@ -225,4 +402,5 @@ const Login = () =>{
 }
 
 export default Login;
+
 

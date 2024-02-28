@@ -1,0 +1,152 @@
+.see-more{
+    padding: 0.9rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #007bff;
+    font-size: 1.1vw;
+}
+
+.details{
+    font-size: 1.2vw;
+    left: 10px;
+}
+
+.sucess{
+    font-size: 1.2vw;
+    left: 10px;
+    color: goldenrod;
+}
+
+.message-card{
+    width: 500px;
+    font-size: 1.4vw;
+    background-color: azure;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+
+.sender{
+    margin-left: 10px;
+}
+
+#username{
+    font-size: 0.8vw;
+    color: brown;
+}
+
+.send-message {
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    border: none; 
+    outline: none; 
+    border-radius: 8px;
+    width: 400px;
+    font-size: 1.1vw;
+    resize: none;
+    overflow-y: hidden; 
+    box-sizing: border-box; 
+    min-height: 3rem; 
+    line-height: 1.5;
+}
+
+.send-message:focus {
+    height: auto; 
+}
+
+.send-button{
+    right: 25px;
+    width: 500px;
+    position: absolute;
+
+}
+
+.send-btn{
+    right: 20px;
+    top: -75px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border: none;
+    border-radius: 10px;
+}
+
+.buy-item{
+    right: 430px;
+    border: none;
+    position: absolute;
+    border-radius: 20px;
+    font-size: 1.2vw;
+    width: 70px;
+    height: 50px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.delete-item{
+    width: 70px;
+    height: 50px;
+    right: 350px;
+    border: none;
+    position: absolute;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.delete-item-btn{
+    width: 30px;
+    height: 40px;
+}
+
+.action{
+    width: 300px;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.select-payment-method{
+    font-size: 1.2vw;
+}
+
+.part-two-transaction{
+    font-size: 1.2vw;
+}
+
+#payment{
+    color: brown;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+
+.proceed{
+    border-radius: 20px;
+    font-size: 1.2vw;
+    width: 150px;
+    height: 50px;
+    color: #007bff;
+    cursor: pointer;
+    border: none;
+}
+
+.phone-number{
+    border: none;
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    position: absolute;
+    margin: 10px;
+    font-size: 1.1vw;
+}
+
+.payment-method{
+    width: 20px;
+    height: 20px;
+}
+
+.error{
+    font-size: 1.2vw;
+    color: brown;
+}
+
+
